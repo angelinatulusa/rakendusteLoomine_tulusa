@@ -17,19 +17,21 @@ namespace rakendusteLoomine_tulusa
         Button close, clear, show;
         CheckBox stretch;
         FlowLayoutPanel flowLayoutPanel1;
+        OpenFileDialog openFileDialog;
         public piltideVaataja()
         {
-            Height = 400;
-            Width = 500;
+            Height = 500;
+            Width = 1000;
             Text = "piltide vaataja";
-
+            openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All files (*.*)|*.*";
             tableLayoutPanel1 = new TableLayoutPanel
             {
                 AutoSize = true,
                 ColumnCount = 2,
                 RowCount = 2,
-                Location = new System.Drawing.Point(0, 0),
-                Size = new System.Drawing.Size(500, 400),
+                Location = new System.Drawing.Point(20, 0),
+                Size = new System.Drawing.Size(300, 400),
                 TabIndex = 0,
             };
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
@@ -49,29 +51,35 @@ namespace rakendusteLoomine_tulusa
             tableLayoutPanel1.Controls.Add(pictureBox, 0, 0);
             tableLayoutPanel1.SetCellPosition(pictureBox, new TableLayoutPanelCellPosition(0, 0));
             tableLayoutPanel1.SetColumnSpan(pictureBox, 2);
+            stretch = new CheckBox
+            {
+                Text= "stretch"
+            };
+            stretch.CheckedChanged += Stretch_CheckedChanged;
+            tableLayoutPanel1.Controls.Add(stretch, 0, 1);
             close = new Button
             {
-                Text="sule",
-                Dock=System.Windows.Forms.DockStyle.Fill
+                Text="sule"
             };
             clear = new Button
             {
-                Text = "kustuta",
-                Dock = System.Windows.Forms.DockStyle.Fill
+                Text = "kustuta"
             };
             show = new Button
             {
-                Text = "näita",
-                Dock = System.Windows.Forms.DockStyle.Fill
+                Text = "näita"
             };
-            Button[] buttons = {clear, show,close};
+            close.Click += Tegevus;
+            clear.Click += Tegevus;
+            show.Click += Tegevus;
+            Button[] buttons = {clear, show, close};
             flowLayoutPanel1 = new FlowLayoutPanel
             {
                 Dock = System.Windows.Forms.DockStyle.Fill,
                 FlowDirection=FlowDirection.RightToLeft,
                 AutoSize=true,
                 WrapContents=false,
-                AutoScroll=true,
+                //AutoScroll=true,
 
             };
             foreach (Button button in buttons)
@@ -80,9 +88,34 @@ namespace rakendusteLoomine_tulusa
             }
             tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 1, 1);
             this.Controls.Add(flowLayoutPanel1);
-            //tableLayoutPanel1.Controls.Add(close,1,1);
-            //tableLayoutPanel1.Controls.Add(clear, 1, 1);
-            //tableLayoutPanel1.Controls.Add(show, 1, 1);
+            
+        }
+        private void Tegevus(object sender, EventArgs e)
+        {
+            Button nupp_sender = (Button)sender;
+            if (nupp_sender.Text=="näita")
+            {
+                if (openFileDialog.ShowDialog()==DialogResult.OK)
+                {
+                    pictureBox.Load(openFileDialog.FileName);
+                }
+            }
+            else if (nupp_sender.Text=="kustuta")
+            {
+                pictureBox.Image = null;
+            }
+            else if (nupp_sender.Text=="sule")
+            {
+                this.Close();
+            }
+        }
+        private void Stretch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (stretch.Checked)
+                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            else
+                pictureBox.SizeMode = PictureBoxSizeMode.Normal;
+
         }
     }
 }

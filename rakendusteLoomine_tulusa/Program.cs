@@ -16,7 +16,7 @@ namespace rakendusteLoomine_tulusa
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new piltideVaataja());
+            Application.Run(new matem());
         }
     }
 }
