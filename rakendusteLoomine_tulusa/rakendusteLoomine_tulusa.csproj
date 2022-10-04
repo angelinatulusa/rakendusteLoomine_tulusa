@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="koikVormid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="koikVormid.Designer.cs">
+      <DependentUpon>koikVormid.cs</DependentUpon>
+    </Compile>
     <Compile Include="matem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,11 +66,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="test.cs">
+    <Compile Include="sobitamine.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="test.Designer.cs">
-      <DependentUpon>test.cs</DependentUpon>
+    <Compile Include="sobitamine.Designer.cs">
+      <DependentUpon>sobitamine.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="matem.resx">
       <DependentUpon>matem.cs</DependentUpon>
@@ -78,9 +84,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="test.resx">
-      <DependentUpon>test.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
