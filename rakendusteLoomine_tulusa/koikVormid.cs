@@ -39,15 +39,29 @@ namespace rakendusteLoomine_tulusa
                 BackColor = Color.LightGoldenrodYellow,
             };
             pilt.Click += Pilt_Click;
+            matem.Click += Matem_Click;
+            parid.Click += Parid_Click;
             this.Controls.Add(pilt);
             this.Controls.Add(matem);
             this.Controls.Add(parid);
         }
 
+        private void Parid_Click(object sender, EventArgs e)
+        {
+            sobitamine Parid = new sobitamine();
+            Parid.ShowDialog();
+        }
+
+        private void Matem_Click(object sender, EventArgs e)
+        {
+            matem Matem = new matem ();
+            Matem.ShowDialog();
+        }
+
         private void Pilt_Click(object sender, EventArgs e)
         {
-            Application.EnableVisualStyles();
-            Application.Run(new piltideVaataja());
+            piltideVaataja PiltideVaataja = new piltideVaataja();
+            PiltideVaataja.ShowDialog();
         }
     }
 }

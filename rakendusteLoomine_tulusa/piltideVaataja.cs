@@ -21,7 +21,7 @@ namespace rakendusteLoomine_tulusa
         public piltideVaataja()
         {
             Height = 500;
-            Width = 1000;
+            Width = 1050;
             Text = "piltide vaataja";
             openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All files (*.*)|*.*";
