@@ -12,21 +12,26 @@ namespace rakendusteLoomine_tulusa
 {
     public partial class sobitamine : Form
     {
+        Random random = new Random();
+        List<string> icons = new List<string>()//иконки(картинки), которым надо искать пару
+        {
+            "?", "?", "k", "k", "v", "v", "u", "u",
+            "e", "e", "a", "a", "t", "t", "n", "n"
+        };
         TableLayoutPanel tableLayoutPanel1 = new TableLayoutPanel();
         Label lbl1;
-        int r = 0;
-        int t=0;
+        int r = 0;//перемнные для создания игрового поля r-rida
+        int t=0;//t-tulp
+
+        public Timer timer = new Timer { Interval = 500 };//время, спустя которое картинки пропадают, когда картинки не совпадают
+
+        Label firstClicked = null;
+        Label secondClicked = null;
+
         public sobitamine()
         {
-            Random random = new Random();
-            List<string> icons = new List<string>()
-            {
-                "!", "!", "N", "N", ",", ",", "k", "k",
-                "b", "b", "v", "v", "w", "w", "z", "z"
-            };
-
             this.Size = new System.Drawing.Size(550, 550);
-            this.Text = "Piltide Leidmise Mäng";
+            this.Text = "Mäng - leia pildi paar";
             this.MaximizeBox = false;
 
             tableLayoutPanel1 = new TableLayoutPanel()
@@ -52,9 +57,9 @@ namespace rakendusteLoomine_tulusa
 
             this.Controls.Add(this.tableLayoutPanel1);
 
-            for (int i = 0; i <3; i++)
+            for (int i = 0; i < 4; i++)//цикл для добавления лейблов
             {
-                for (int j = 0; j <=3; j++)
+                for (int j = 0; j <= 3; j++)
                 {
                     lbl1 = new Label()
                     {
@@ -62,206 +67,88 @@ namespace rakendusteLoomine_tulusa
                         AutoSize = false,
                         Dock = System.Windows.Forms.DockStyle.Fill,
                         TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-                        Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-                        Text = "c"
+                        Font = new System.Drawing.Font("Webdings", 48, System.Drawing.FontStyle.Bold),
+                        Text = "c",
                     };
                     tableLayoutPanel1.Controls.Add(lbl1, r, t);
                     r++;
+
                 }
                 t++;
+                r = 0;
             }
-            ////1 rida
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 0, 0);
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 1, 0);
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 2, 0);
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 3, 0);
-            ////2 rida
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 0, 1);
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 1, 1);
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 2, 1);
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 3, 1);
-            ////3 rida
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 0, 2);
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 1, 2);
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 2, 2);
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 3, 2);
-            ////4 rida
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 0, 3);
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 1, 3);
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 2, 3);
-            //lbl1 = new Label()
-            //{
-            //    BackColor = System.Drawing.Color.CornflowerBlue,
-            //    AutoSize = false,
-            //    Dock = System.Windows.Forms.DockStyle.Fill,
-            //    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-            //    Font = new System.Drawing.Font("Webbings", 48, System.Drawing.FontStyle.Bold),
-            //    Text = "c"
-            //};
-            //tableLayoutPanel1.Controls.Add(lbl1, 3, 3);
+            foreach (Control control in tableLayoutPanel1.Controls)//добавление иконок рандомно
+            {
+                Label iconLabel1 = control as Label;
+                if (iconLabel1 != null)
+                {
+                    int randomNumber = random.Next(icons.Count);
+                    iconLabel1.Text = icons[randomNumber];
+                    icons.RemoveAt(randomNumber);
+                }
+                iconLabel1.ForeColor = iconLabel1.BackColor;
+                iconLabel1.Click += Lbl1_Click;
+            }
+            timer.Tick += Timer_Tick;
         }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            timer.Stop();
 
-        
+            firstClicked.ForeColor = firstClicked.BackColor;
+            secondClicked.ForeColor = secondClicked.BackColor;
 
-        //private void AssignIconsToSquares()
-        //{
-        //    foreach (Control control in tableLayoutPanel1.Controls)
-        //    {
-        //        Label iconLabel = control as Label;
-        //        if (iconLabel != null)
-        //        {
-        //            int randomNumber = random.Next(icons.Count);
-        //            iconLabel.Text = icons[randomNumber];
-        //            icons.RemoveAt(randomNumber);
-        //        }
-        //    }
-        //}
-        //private void Lbl1_Click(object sender, EventArgs e)
-        //{
-        //    Label clickedLabel = sender as Label;
+            firstClicked = null;
+            secondClicked = null;
+        }
+        private void Lbl1_Click(object sender, EventArgs e)
+        {
+            if (timer.Enabled == true)
+                return;
 
-        //    if (clickedLabel != null)
-        //    {
-        //        if (clickedLabel.ForeColor == Color.Black)
-        //            return;
+            Label clickedLabel = sender as Label;
 
-        //        clickedLabel.ForeColor = Color.Black;
-        //    }
-        //}
+            if (clickedLabel != null)
+            {
+                if (clickedLabel.ForeColor == Color.Black)
+                    return;
+
+                if (firstClicked == null)
+                {
+                    firstClicked = clickedLabel;
+                    firstClicked.ForeColor = Color.Black;
+                    return;
+                }
+
+                secondClicked = clickedLabel;
+                secondClicked.ForeColor = Color.Black;
+
+                CheckForWinner();
+
+                if (firstClicked.Text == secondClicked.Text)
+                {
+                    firstClicked = null;
+                    secondClicked = null;
+                    return;
+                }
+
+                timer.Start();
+            }
+        }
+        public void CheckForWinner()
+        {
+            foreach (Control control in tableLayoutPanel1.Controls)
+            {
+                Label iconLabel = control as Label;
+
+                if (iconLabel != null)
+                {
+                    if (iconLabel.ForeColor == iconLabel.BackColor)
+                        return;
+                }
+            }
+            MessageBox.Show("Sa leised kõik paarid!!!", "Palju õnne!");
+            Close();
+        }
     }
 }
