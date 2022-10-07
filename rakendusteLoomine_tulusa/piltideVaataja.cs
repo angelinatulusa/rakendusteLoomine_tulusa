@@ -18,10 +18,11 @@ namespace rakendusteLoomine_tulusa
         CheckBox stretch;
         FlowLayoutPanel flowLayoutPanel1;
         OpenFileDialog openFileDialog;
+        RadioButton center;
         public piltideVaataja()
         {
             Height = 500;
-            Width = 1050;
+            Width = 1150;
             Text = "piltide vaataja";
             openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All files (*.*)|*.*";
@@ -46,7 +47,8 @@ namespace rakendusteLoomine_tulusa
                 Dock = System.Windows.Forms.DockStyle.Fill,
                 Location = new System.Drawing.Point(2, 2),
                 TabIndex=0,
-                TabStop=false
+                TabStop=false,
+                Size = new System.Drawing.Size(200,200) 
             };
             tableLayoutPanel1.Controls.Add(pictureBox, 0, 0);
             tableLayoutPanel1.SetCellPosition(pictureBox, new TableLayoutPanelCellPosition(0, 0));
@@ -57,21 +59,14 @@ namespace rakendusteLoomine_tulusa
             };
             stretch.CheckedChanged += Stretch_CheckedChanged;
             tableLayoutPanel1.Controls.Add(stretch, 0, 1);
-            close = new Button
-            {
-                Text="sule"
-            };
-            clear = new Button
-            {
-                Text = "kustuta"
-            };
-            show = new Button
-            {
-                Text = "näita"
-            };
+            close = new Button{Text = "sule"};
+            clear = new Button{Text = "kustuta"};
+            show = new Button{Text = "näita"};
+            center = new RadioButton { Text = "keskusesse" };
             close.Click += Tegevus;
             clear.Click += Tegevus;
             show.Click += Tegevus;
+            center.CheckedChanged += new EventHandler(R_Tegevus);
             Button[] buttons = {clear, show, close};
             flowLayoutPanel1 = new FlowLayoutPanel
             {
@@ -86,9 +81,27 @@ namespace rakendusteLoomine_tulusa
             {
                 flowLayoutPanel1.Controls.Add(button);
             }
+            flowLayoutPanel1.Controls.Add(center);
             tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 1, 1);
             this.Controls.Add(flowLayoutPanel1);
             
+        }
+        private void R_Tegevus(object sender, EventArgs e)
+        {
+            RadioButton radio_sender = (RadioButton)sender;
+            if (radio_sender.Text == "keskusesse")
+            {
+                pictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
+                center.Checked = false;
+            }
+            /*else if (radio_sender.Text == "kustuta")
+            {
+                pictureBox.Image = null;
+            }
+            else if (radio_sender.Text == "sule")
+            {
+                this.Close();
+            }*/
         }
         private void Tegevus(object sender, EventArgs e)
         {

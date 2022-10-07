@@ -23,10 +23,11 @@ namespace rakendusteLoomine_tulusa
         Timer timer=new Timer { Interval = 1000 };//1000 чтобы таймер считал в секундах
         int[]num1=new int[4];
         int[]num2=new int[4];
+        Button start;
         public matem()
         {
             
-            this.Size = new Size(860, 300);
+            this.Size = new Size(850, 300);
             tableLayoutPanel = new TableLayoutPanel
             {
                 AutoSize = true,
@@ -43,10 +44,27 @@ namespace rakendusteLoomine_tulusa
                 Size = new System.Drawing.Size(200, 30),
                 Font = new Font("Times New Roman", 20, FontStyle.Bold)
             };
+            start = new Button
+            {
+                Text = "START",
+                AutoSize = false,
+                Size = new System.Drawing.Size(250, 100),
+                Font = new Font("Times New Roman", 20, FontStyle.Bold),
+                BackColor = System.Drawing.Color.LightSalmon,
+                Location = new System.Drawing.Point(300,100),
+            };
             l_nimed = new string[5, 4];
             timer.Enabled = true;
             //timer.Start();
-            this.DoubleClick += Matem_DoubleClick;           
+            start.Click += Start_Click;
+            this.Controls.Add(start);
+            
+        }
+
+        private void Start_Click(object sender, EventArgs e)
+        {
+            this.Controls.Clear();
+            this.DoubleClick += Matem_DoubleClick;
             timer.Tick += Timer_Tick;
             for (int i = 0; i < 4; i++)
             {
@@ -56,43 +74,43 @@ namespace rakendusteLoomine_tulusa
                     tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
                     var l_nimi = "L" + j.ToString() + i.ToString();
                     l_nimed[j, i] = l_nimi;
-                    if (j==1){text = tehed[i];}
-                    else if (j==3){text = "=";}
-                    else if (j==4){text = "vastus";}
-                    else if(j==0)
+                    if (j == 1) { text = tehed[i]; }
+                    else if (j == 3) { text = "="; }
+                    else if (j == 4) { text = "vastus"; }
+                    else if (j == 0)
                     {
                         int a = random.Next(20);
                         text = a.ToString();//l_nimi
                         num1[i] = a;
                     }
-                    else if (j==2)
+                    else if (j == 2)
                     {
                         int a = random.Next(10);
                         text = a.ToString();//l_nimi
                         num2[i] = a;
                     }
-                    if (j==4)
+                    if (j == 4)
                     {
-                        vastused[i] = new NumericUpDown 
-                        { 
+                        vastused[i] = new NumericUpDown
+                        {
                             Name = tehed[i],
-                            DecimalPlaces=5,
+                            DecimalPlaces = 5,
                             Minimum = -20,
                         };
                         tableLayoutPanel.Controls.Add(vastused[i], j, i);
                     }
                     else
                     {
-                        Label l=new Label { Text = text };
-                        tableLayoutPanel.Controls.Add(l,j,i);
+                        Label l = new Label { Text = text };
+                        tableLayoutPanel.Controls.Add(l, j, i);
                     }
-                    
+
                 }
             }
             this.Controls.Add(tableLayoutPanel);
             this.Controls.Add(timeLabel);
-            
         }
+
         int tik = 0;
         private void Matem_DoubleClick(object sender, EventArgs e)
         {

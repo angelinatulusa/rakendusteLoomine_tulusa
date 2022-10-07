@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="kass.png" />
+    <Content Include="lisaks.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
