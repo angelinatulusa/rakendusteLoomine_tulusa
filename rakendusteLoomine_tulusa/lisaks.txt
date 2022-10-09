@@ -1,9 +1,10 @@
-﻿1. в математике сделать кнопку "старт", которая запускает форму
-2. сделать более сложный вариант(и упрощенный тоже можно) в третьей форме
-3. попробовать добавить возможность менять размер картинки в зависимости от радио кнопки
+﻿1. matemaatikas tehke "Start" nupp, mis käivitab vormi
+2. teha keerulisem versioon (ja võimalik on ka lihtsustatud variant) kolmandal kujul
+3. proovi lisada pildi suuruse muutmise võimalus olenevalt raadionupust
+4. muusikat lisada
 
 --------------------------------------------------------------------------------------------------------------------
 
 (1) valmis
 (2)
-(3) сделала радиокнопку, которая перетаскивает изображение в центр(в первой форме)
+(3) tegin raadionupu, mis lohistab pildi keskele (esimesel kujul)

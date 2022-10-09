@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,6 +28,9 @@ namespace rakendusteLoomine_tulusa
 
         Label firstClicked = null;
         Label secondClicked = null;
+
+        RadioButton laul1, laul2, stop;
+        Label laul;
 
         Button raskem;
         public sobitamine()
@@ -52,6 +56,27 @@ namespace rakendusteLoomine_tulusa
                 Location = new System.Drawing.Point(825,0),
                 Size = new System.Drawing.Size(50,25)
             };
+            laul1 = new RadioButton
+            {
+                Text = "esimene laul",
+                Location = new System.Drawing.Point(700, 50),
+            };
+            laul2 = new RadioButton
+            {
+                Text = "teine laul",
+                Location = new System.Drawing.Point(700, 75),
+            };
+            stop = new RadioButton
+            {
+                Text = "lõpeta laul",
+                Location = new System.Drawing.Point(700, 100),
+            };
+            laul = new Label
+            {
+                Text = "Vali laul:",
+                Location = new System.Drawing.Point(640, 25),
+                Font = new Font("Arial", 12),
+            };
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -63,7 +88,11 @@ namespace rakendusteLoomine_tulusa
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
 
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.raskem);
+            //this.Controls.Add(this.raskem);
+            this.Controls.Add(this.laul);
+            this.Controls.Add(this.laul1);
+            this.Controls.Add(this.laul2);
+            this.Controls.Add(this.stop);
 
             for (int i = 0; i < 4; i++)//цикл для добавления лейблов
             {
@@ -94,14 +123,21 @@ namespace rakendusteLoomine_tulusa
                     iconLabel1.Text = icons[randomNumber];
                     icons.RemoveAt(randomNumber);
                 }
+                if (laul1.Checked == true)
+                {
+                    using (var muusika = new SoundPlayer(@"..\..\laul1.wav"))
+                    {
+                        muusika.Play();
+                    }
+                }
                 iconLabel1.ForeColor = iconLabel1.BackColor;
                 iconLabel1.Click += Lbl1_Click;
             }
-            raskem.Click += Raskem_Click;
+            //raskem.Click += Raskem_Click;
             timer.Tick += Timer_Tick;
         }
 
-        private void Raskem_Click(object sender, EventArgs e)
+        /*private void Raskem_Click(object sender, EventArgs e)
         {
             tableLayoutPanel1.Controls.Clear();
             tableLayoutPanel1.Size = new System.Drawing.Size(450, 450);
@@ -125,7 +161,7 @@ namespace rakendusteLoomine_tulusa
                 t++;
                 r = 0;
             }
-        }
+        }*/
 
         private void Timer_Tick(object sender, EventArgs e)
         {
