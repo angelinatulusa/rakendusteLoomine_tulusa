@@ -88,7 +88,7 @@ namespace rakendusteLoomine_tulusa
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
 
             this.Controls.Add(this.tableLayoutPanel1);
-            //this.Controls.Add(this.raskem);
+            this.Controls.Add(this.raskem);
             this.Controls.Add(this.laul);
             this.Controls.Add(this.laul1);
             this.Controls.Add(this.laul2);
@@ -123,24 +123,25 @@ namespace rakendusteLoomine_tulusa
                     iconLabel1.Text = icons[randomNumber];
                     icons.RemoveAt(randomNumber);
                 }
-                if (laul1.Checked == true)
+                /*if (laul1.Checked == true)
                 {
                     using (var muusika = new SoundPlayer(@"..\..\laul1.wav"))
                     {
                         muusika.Play();
                     }
-                }
+                }*/
                 iconLabel1.ForeColor = iconLabel1.BackColor;
                 iconLabel1.Click += Lbl1_Click;
             }
-            //raskem.Click += Raskem_Click;
             timer.Tick += Timer_Tick;
+            raskem.Click += Raskem_Click;
+            
         }
 
-        /*private void Raskem_Click(object sender, EventArgs e)
+        private void Raskem_Click(object sender, EventArgs e)
         {
             tableLayoutPanel1.Controls.Clear();
-            tableLayoutPanel1.Size = new System.Drawing.Size(450, 450);
+            //tableLayoutPanel1.Size = new System.Drawing.Size(450, 450);
             for (int i = 0; i < 2; i++)//цикл для добавления лейблов
             {
                 for (int j = 0; j <= 2; j++)
@@ -161,7 +162,7 @@ namespace rakendusteLoomine_tulusa
                 t++;
                 r = 0;
             }
-        }*/
+        }
 
         private void Timer_Tick(object sender, EventArgs e)
         {

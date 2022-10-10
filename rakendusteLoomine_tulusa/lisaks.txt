@@ -1,10 +1,28 @@
-﻿1. matemaatikas tehke "Start" nupp, mis käivitab vormi
+﻿Идеи:
+1. matemaatikas tehke "Start" nupp, mis käivitab vormi
 2. teha keerulisem versioon (ja võimalik on ka lihtsustatud variant) kolmandal kujul
 3. proovi lisada pildi suuruse muutmise võimalus olenevalt raadionupust
 4. muusikat lisada
+в математику сделать возможноcть еще раз сгенерировать примерыб выбраться сложность,добавить очки
+слайд-шоу в первую попробовать сделать
+в форме с картинками сделать несколько вариантов с фоном разных цветов
+
+
+Что в итоге надо сделать:
+--------------------------------------------------------------------------------------------------------------------
+Piltide vaataja
+1.слайд-шоу в первую попробовать сделать
+2.muusikat lisada
+3.proovi lisada pildi suuruse muutmise võimalus olenevalt raadionupust
 
 --------------------------------------------------------------------------------------------------------------------
+Matemaatika
+1.matemaatikas tehke "Start" nupp, mis käivitab vormi
+2.в математику сделать возможноcть еще раз сгенерировать примеры
+3.выбрать сложность
 
-(1) valmis
-(2)
-(3) tegin raadionupu, mis lohistab pildi keskele (esimesel kujul)
+--------------------------------------------------------------------------------------------------------------------
+Paarid
+1.teha keerulisem versioon (ja võimalik on ka lihtsustatud variant) kolmandal kujul
+2.muusikat lisada
+3.добавить время за которое надо найти все пары

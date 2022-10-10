@@ -94,14 +94,6 @@ namespace rakendusteLoomine_tulusa
                 pictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
                 center.Checked = false;
             }
-            /*else if (radio_sender.Text == "kustuta")
-            {
-                pictureBox.Image = null;
-            }
-            else if (radio_sender.Text == "sule")
-            {
-                this.Close();
-            }*/
         }
         private void Tegevus(object sender, EventArgs e)
         {
