@@ -100,7 +100,7 @@
   <ItemGroup>
     <Content Include="kass.png" />
     <Content Include="laul1.wav" />
-    <Content Include="lisaks.txt" />
+    <Content Include="readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

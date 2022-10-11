@@ -14,11 +14,7 @@ namespace rakendusteLoomine_tulusa
     public partial class sobitamine : Form
     {
         Random random = new Random();
-        List<string> icons = new List<string>()//иконки(картинки), которым надо искать пару
-        {
-            "?", "?", "k", "k", "v", "v", "u", "u",
-            "e", "e", "a", "a", "t", "t", "n", "n"
-        };
+        
         TableLayoutPanel tableLayoutPanel1 = new TableLayoutPanel();
         Label lbl1;
         int r = 0;//перемнные для создания игрового поля r-rida
@@ -28,11 +24,9 @@ namespace rakendusteLoomine_tulusa
 
         Label firstClicked = null;
         Label secondClicked = null;
+        Label keerukus;
 
-        RadioButton laul1, laul2, stop;
-        Label laul;
-
-        Button raskem;
+        Button lihtsalt,keskmine,raske;
         public sobitamine()
         {
             this.Size = new System.Drawing.Size(900, 900);
@@ -50,53 +44,74 @@ namespace rakendusteLoomine_tulusa
                 CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset,
                 BackColor = System.Drawing.Color.CornflowerBlue,
             };
-            raskem = new Button
+            lihtsalt = new Button
             {
-                Text = "raskem",
-                Location = new System.Drawing.Point(825,0),
-                Size = new System.Drawing.Size(50,25)
+                Text = "lihtsalt",
+                AutoSize = false,
+                Size = new System.Drawing.Size(250, 100),
+                Font = new Font("Times New Roman", 20, FontStyle.Bold),
+                BackColor = System.Drawing.Color.LightSalmon,
+                Location = new System.Drawing.Point(50, 100),
             };
-            laul1 = new RadioButton
+            keskmine = new Button
             {
-                Text = "esimene laul",
-                Location = new System.Drawing.Point(700, 50),
+                Text = "keskmine",
+                AutoSize = false,
+                Size = new System.Drawing.Size(250, 100),
+                Font = new Font("Times New Roman", 20, FontStyle.Bold),
+                BackColor = System.Drawing.Color.LightSalmon,
+                Location = new System.Drawing.Point(325, 100),
             };
-            laul2 = new RadioButton
+            raske = new Button
             {
-                Text = "teine laul",
-                Location = new System.Drawing.Point(700, 75),
+                Text = "raske",
+                AutoSize = false,
+                Size = new System.Drawing.Size(250, 100),
+                Font = new Font("Times New Roman", 20, FontStyle.Bold),
+                BackColor = System.Drawing.Color.LightSalmon,
+                Location = new System.Drawing.Point(600, 100),
             };
-            stop = new RadioButton
+            keerukus = new Label
             {
-                Text = "lõpeta laul",
-                Location = new System.Drawing.Point(700, 100),
+                Text = "Vali keerukus:",
+                AutoSize = true,
+                Location = new System.Drawing.Point(285, 15),
+                Font = new Font("Arial", 30, FontStyle.Bold),
             };
-            laul = new Label
-            {
-                Text = "Vali laul:",
-                Location = new System.Drawing.Point(640, 25),
-                Font = new Font("Arial", 12),
-            };
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.Controls.Add(keskmine);
+            this.Controls.Add(lihtsalt);
+            this.Controls.Add(raske);
+            this.Controls.Add(keerukus);
 
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            timer.Tick += Timer_Tick;
+            lihtsalt.Click += Lihtsalt_Click;
+            keskmine.Click += Keskmine_Click;
+            raske.Click += Raske_Click;
+            
+        }
 
+        private void Lihtsalt_Click(object sender, EventArgs e)
+        {
+            this.Controls.Clear();
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.raskem);
-            this.Controls.Add(this.laul);
-            this.Controls.Add(this.laul1);
-            this.Controls.Add(this.laul2);
-            this.Controls.Add(this.stop);
-
-            for (int i = 0; i < 4; i++)//цикл для добавления лейблов
+            List<string> icons = new List<string>()//иконки(картинки), которым надо искать пару
             {
-                for (int j = 0; j <= 3; j++)
+                "?", "?", "k", "k", "v", "v", "u", "u",
+                "e", "e", "a", "a", "t", "t",
+            };
+
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+
+            for (int i = 0; i < 3; i++)//цикл для добавления лейблов
+            {
+                for (int j = 0; j < 4; j++)
                 {
                     lbl1 = new Label()
                     {
@@ -123,28 +138,34 @@ namespace rakendusteLoomine_tulusa
                     iconLabel1.Text = icons[randomNumber];
                     icons.RemoveAt(randomNumber);
                 }
-                /*if (laul1.Checked == true)
-                {
-                    using (var muusika = new SoundPlayer(@"..\..\laul1.wav"))
-                    {
-                        muusika.Play();
-                    }
-                }*/
                 iconLabel1.ForeColor = iconLabel1.BackColor;
                 iconLabel1.Click += Lbl1_Click;
             }
-            timer.Tick += Timer_Tick;
-            raskem.Click += Raskem_Click;
-            
         }
 
-        private void Raskem_Click(object sender, EventArgs e)
+        private void Keskmine_Click(object sender, EventArgs e)
         {
-            tableLayoutPanel1.Controls.Clear();
-            //tableLayoutPanel1.Size = new System.Drawing.Size(450, 450);
-            for (int i = 0; i < 2; i++)//цикл для добавления лейблов
+            this.Controls.Clear();
+            this.Controls.Add(this.tableLayoutPanel1);
+            List<string> icons = new List<string>()//иконки(картинки), которым надо искать пару
             {
-                for (int j = 0; j <= 2; j++)
+                "?", "?", "k", "k", "v", "v", "u", "u",
+                "e", "e", "a", "a", "t", "t", "n", "n"
+            };
+
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+
+            for (int i = 0; i < 4; i++)//цикл для добавления лейблов
+            {
+                for (int j = 0; j < 4; j++)
                 {
                     lbl1 = new Label()
                     {
@@ -152,7 +173,7 @@ namespace rakendusteLoomine_tulusa
                         AutoSize = false,
                         Dock = System.Windows.Forms.DockStyle.Fill,
                         TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-                        Font = new System.Drawing.Font("Webdings", 40, System.Drawing.FontStyle.Bold),
+                        Font = new System.Drawing.Font("Webdings", 48, System.Drawing.FontStyle.Bold),
                         Text = "c",
                     };
                     tableLayoutPanel1.Controls.Add(lbl1, r, t);
@@ -161,6 +182,73 @@ namespace rakendusteLoomine_tulusa
                 }
                 t++;
                 r = 0;
+            }
+            foreach (Control control in tableLayoutPanel1.Controls)//добавление иконок рандомно
+            {
+                Label iconLabel1 = control as Label;
+                if (iconLabel1 != null)
+                {
+                    int randomNumber = random.Next(icons.Count);
+                    iconLabel1.Text = icons[randomNumber];
+                    icons.RemoveAt(randomNumber);
+                }
+                iconLabel1.ForeColor = iconLabel1.BackColor;
+                iconLabel1.Click += Lbl1_Click;
+            }
+        }
+
+        private void Raske_Click(object sender, EventArgs e)
+        {
+            this.Controls.Clear();
+            this.Controls.Add(this.tableLayoutPanel1);
+            List<string> icons = new List<string>()//иконки(картинки), которым надо искать пару
+            {
+                "?", "?", "k", "k", "v", "v", "u", "u","!","!",
+                "e", "e", "a", "a", "t", "t", "n", "n","w","w"
+            };
+
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+
+            for (int i = 0; i < 4; i++)//цикл для добавления лейблов
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    lbl1 = new Label()
+                    {
+                        BackColor = System.Drawing.Color.CornflowerBlue,
+                        AutoSize = false,
+                        Dock = System.Windows.Forms.DockStyle.Fill,
+                        TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                        Font = new System.Drawing.Font("Webdings", 48, System.Drawing.FontStyle.Bold),
+                        Text = "c",
+                    };
+                    tableLayoutPanel1.Controls.Add(lbl1, r, t);
+                    r++;
+
+                }
+                t++;
+                r = 0;
+            }
+            foreach (Control control in tableLayoutPanel1.Controls)//добавление иконок рандомно
+            {
+                Label iconLabel1 = control as Label;
+                if (iconLabel1 != null)
+                {
+                    int randomNumber = random.Next(icons.Count);
+                    iconLabel1.Text = icons[randomNumber];
+                    icons.RemoveAt(randomNumber);
+                }
+                iconLabel1.ForeColor = iconLabel1.BackColor;
+                iconLabel1.Click += Lbl1_Click;
             }
         }
 
