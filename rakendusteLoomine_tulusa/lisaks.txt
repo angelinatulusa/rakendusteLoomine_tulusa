@@ -18,8 +18,8 @@ Piltide vaataja
 --------------------------------------------------------------------------------------------------------------------
 Matemaatika
 1.matemaatikas tehke "Start" nupp, mis käivitab vormi
-2.в математику сделать возможноcть еще раз сгенерировать примеры
-3.выбрать сложность
+2.matemaatikas on nupp, mis loob uuesti küsimused
+3.olenevalt(в зависимости) ajast kirjutab messageboxis kui hea tulemus on
 
 --------------------------------------------------------------------------------------------------------------------
 Paarid

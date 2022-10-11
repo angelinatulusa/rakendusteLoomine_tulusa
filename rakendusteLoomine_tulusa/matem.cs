@@ -47,21 +47,21 @@ namespace rakendusteLoomine_tulusa
                 Size = new System.Drawing.Size(200, 30),
                 Font = new Font("Times New Roman", 20, FontStyle.Bold)
             };
-            /*p_arv = new Label
+            p_arv = new Label
             {
                 Text = "Sinu punktid: ",
                 Size = new System.Drawing.Size(200, 30),
-                Font = new Font("Times New Roman", 17, FontStyle.Bold),
-                Location = new System.Drawing.Point(0,30)
-            };*/
+                Font = new Font("Times New Roman", 15, FontStyle.Bold),
+                Location = new System.Drawing.Point(125,28)
+            };
             v_kord=new Button
             {
-                Text = "Teised küsimused",
+                Text = "Teised tehed",
                 AutoSize = false,
                 Size = new System.Drawing.Size(120, 21),
                 BackColor = System.Drawing.Color.LightSteelBlue,
                 Location = new System.Drawing.Point(0, 30),
-            };
+            };//nupp, mis tekitab uuesti küsimusi
             start = new Button
             {
                 Text = "START",
@@ -70,11 +70,11 @@ namespace rakendusteLoomine_tulusa
                 Font = new Font("Times New Roman", 20, FontStyle.Bold),
                 BackColor = System.Drawing.Color.LightSalmon,
                 Location = new System.Drawing.Point(300,100),
-            };
+            };//nupp, mis näitab küsimusi ja käivitab taimeri
             l_nimed = new string[5, 4];
             timer.Enabled = true;
-            //timer.Start();
-            start.Click += Start_Click;
+            v_kord.Click += V_kord_Click;//käivitusnupp "Teised tehed"
+            start.Click += Start_Click;//käivitusnupp "Start"
             this.Controls.Add(start);
             
 
@@ -82,6 +82,7 @@ namespace rakendusteLoomine_tulusa
         public void Start_Click(object sender, EventArgs e)
         {
             this.Controls.Clear();
+            tableLayoutPanel.Controls.Clear();
             this.DoubleClick += Matem_DoubleClick;
             timer.Tick += Timer_Tick;
             for (int i = 0; i < 4; i++)
@@ -127,60 +128,18 @@ namespace rakendusteLoomine_tulusa
             }
             this.Controls.Add(tableLayoutPanel);
             this.Controls.Add(timeLabel);
-            v_kord.Click += V_kord_Click;
+            
             this.Controls.Add(v_kord);
 
-            //this.Controls.Add(p_arv);
-        }
+            this.Controls.Add(p_arv);
+        }//kuvab näiteid ja taimerit
         private void V_kord_Click(object sender, EventArgs e)
         {
-            this.Controls.Clear();
-            this.DoubleClick += Matem_DoubleClick;
-            timer.Tick += Timer_Tick;
-            for (int i = 0; i < 4; i++)
-            {
-                tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-                for (int j = 0; j < 5; j++)
-                {
-                    tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-                    var l_nimi = "L" + j.ToString() + i.ToString();
-                    l_nimed[j, i] = l_nimi;
-                    if (j == 1) { text = tehed[i]; }
-                    else if (j == 3) { text = "="; }
-                    else if (j == 4) { text = "vastus"; }
-                    else if (j == 0)
-                    {
-                        int a = random.Next(20);
-                        text = a.ToString();//l_nimi
-                        num1[i] = a;
-                    }
-                    else if (j == 2)
-                    {
-                        int a = random.Next(10);
-                        text = a.ToString();//l_nimi
-                        num2[i] = a;
-                    }
-                    if (j == 4)
-                    {
-                        vastused[i] = new NumericUpDown
-                        {
-                            Name = tehed[i],
-                            DecimalPlaces = 5,
-                            Minimum = -20,
-                        };
-                        tableLayoutPanel.Controls.Add(vastused[i], j, i);
-                    }
-                    else
-                    {
-                        Label l = new Label { Text = text };
-                        tableLayoutPanel.Controls.Add(l, j, i);
-                    }
 
-                }
-            }
-            this.Controls.Add(tableLayoutPanel);
-            this.Controls.Add(timeLabel);
-        }
+            Controls.Clear();
+            start.Click += Start_Click;
+            this.Controls.Add(start);
+        }//tühjendab vormi ja käivitab Start
 
         int tik = 0;
         private void Matem_DoubleClick(object sender, EventArgs e)
@@ -201,17 +160,17 @@ namespace rakendusteLoomine_tulusa
             }
             else { return false; }
         }
-        /*private void Punktid()
+        private void Punktid()
         {
             if (num1[0] + num2[0] == vastused[0].Value
-                && num1[1] - num2[1] == vastused[1].Value
-                && num1[2] / num2[2] == vastused[2].Value
-                && num1[3] * num2[3] == vastused[3].Value)
+                || num1[1] - num2[1] == vastused[1].Value
+                || num1[2] / num2[2] == vastused[2].Value
+                || num1[3] * num2[3] == vastused[3].Value)
             {
                 punktid+=10;
                 p_arv.Text = punktid.ToString();
             }
-        }*/
+        }
         private void Timer_Tick(object sender, EventArgs e)
         {
             tik++;
@@ -220,7 +179,21 @@ namespace rakendusteLoomine_tulusa
             {
                 timer.Stop();
                 MessageBox.Show("Sinu vastused on õiged", "Palju õnne!");
+                Convert.ToInt32(tik);
+                if (tik >= 120)
+                {
+                    MessageBox.Show("Sul läheb liiga kaua aega", "Liiga kaua((");
+                }
+                else if (tik < 120 && tik > 60)
+                {
+                    MessageBox.Show("Sul on keskmine tulemus", "Saad paremini!");
+                }
+                else
+                {
+                    MessageBox.Show("Sul on suurepärane tulemus!", ":>");
+                }
             }
+            
         }
 
         
