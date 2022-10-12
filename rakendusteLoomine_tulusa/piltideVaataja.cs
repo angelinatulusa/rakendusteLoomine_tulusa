@@ -14,7 +14,7 @@ namespace rakendusteLoomine_tulusa
     {
         TableLayoutPanel tableLayoutPanel1;
         PictureBox pictureBox;
-        Button close, clear, show, next, back;
+        Button close, clear, show, next, back,kinni;
         CheckBox stretch;
         FlowLayoutPanel flowLayoutPanel1;
         OpenFileDialog openFileDialog;
@@ -65,6 +65,15 @@ namespace rakendusteLoomine_tulusa
             show = new Button { Text = "näita" };
             next = new Button { Text = "järgmiseks" };
             back = new Button { Text = "eelmine" };
+            kinni = new Button
+            {
+                Text = "kinni",
+                AutoSize = false,
+                Size = new System.Drawing.Size(75, 50),
+                Font = new Font("Times New Roman", 10, FontStyle.Bold),
+                BackColor = System.Drawing.Color.LightCyan,
+                Location = new System.Drawing.Point(800, 50),
+            };
             center = new CheckBox { Text = "keskusesse" };
             close.Click += Tegevus;
             clear.Click += Tegevus;
@@ -84,16 +93,25 @@ namespace rakendusteLoomine_tulusa
             {
                 flowLayoutPanel1.Controls.Add(button);
             }
+
             flowLayoutPanel1.Controls.Add(center);
             tableLayoutPanel1.Controls.Add(next, 1, 2);
             tableLayoutPanel1.Controls.Add(back, 1, 1);
             tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 1, 1);
+            tableLayoutPanel1.Controls.Add(kinni, 2, 1);
             this.Controls.Add(flowLayoutPanel1);
             next.Click += Next_Click;
             back.Click += Back_Click;
+            kinni.Click+=Kinni_Click;
 
 
          }
+
+        private void Kinni_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void Back_Click(object sender, EventArgs e)
         {
             if (picture == "valge")

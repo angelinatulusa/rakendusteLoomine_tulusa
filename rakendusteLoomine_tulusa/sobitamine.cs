@@ -30,7 +30,7 @@ namespace rakendusteLoomine_tulusa
         Label secondClicked = null;
         Label keerukus;
 
-        Button lihtsalt,keskmine,raske;
+        Button lihtsalt,keskmine,raske,kinni;
         public sobitamine()
         {
             this.Size = new System.Drawing.Size(900, 900);
@@ -82,6 +82,15 @@ namespace rakendusteLoomine_tulusa
                 Location = new System.Drawing.Point(285, 15),
                 Font = new Font("Arial", 30, FontStyle.Bold),
             };
+            kinni = new Button
+            {
+                Text = "kinni",
+                AutoSize = false,
+                Size = new System.Drawing.Size(75, 50),
+                Font = new Font("Times New Roman", 10, FontStyle.Bold),
+                BackColor = System.Drawing.Color.LightCyan,
+                Location = new System.Drawing.Point(800, 50),
+            };
             timeLabel = new Label
             {
                 Text = "aega veel: ",
@@ -113,6 +122,8 @@ namespace rakendusteLoomine_tulusa
         private void Lihtsalt_Click(object sender, EventArgs e)
         {
             this.Controls.Clear();
+            this.Controls.Add(kinni);
+            kinni.Click += Kinni_Click;
             this.Controls.Add(this.tableLayoutPanel1);
             List<string> icons = new List<string>()//иконки(картинки), которым надо искать пару
             {
@@ -168,6 +179,12 @@ namespace rakendusteLoomine_tulusa
             timer2.Tick += Timer2_Tick;
 
         }
+
+        private void Kinni_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         int tik=60;
         private void Timer2_Tick(object sender, EventArgs e)
         {
@@ -184,6 +201,8 @@ namespace rakendusteLoomine_tulusa
         private void Keskmine_Click(object sender, EventArgs e)
         {
             this.Controls.Clear();
+            this.Controls.Add(kinni);
+            kinni.Click += Kinni_Click;
             this.Controls.Add(this.tableLayoutPanel1);
             List<string> icons = new List<string>()//иконки(картинки), которым надо искать пару
             {
@@ -254,6 +273,8 @@ namespace rakendusteLoomine_tulusa
         private void Raske_Click(object sender, EventArgs e)
         {
             this.Controls.Clear();
+            this.Controls.Add(kinni);
+            kinni.Click += Kinni_Click;
             this.Controls.Add(this.tableLayoutPanel1);
             List<string> icons = new List<string>()//иконки(картинки), которым надо искать пару
             {

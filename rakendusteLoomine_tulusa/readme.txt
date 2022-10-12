@@ -11,7 +11,7 @@
 Что в итоге сделано:
 --------------------------------------------------------------------------------------------------------------------
 Piltide vaataja
-1.слайд-шоу в первую попробовать сделать
+1.slaidiseanss
 2.muusikat lisada
 3.proovi lisada pildi suuruse muutmise võimalus olenevalt raadionupust
 
@@ -26,3 +26,5 @@ Paarid
 1.tegin raskuse valiku
 2.добавить попытки, если все попытки истрачены, то форма закрывается
 3.Kõigile kolmele raskusele lisandub aeg (erinev), mille jaoks peate leidma kõik paarid
+--------------------------------------------------------------------------------------------------------------------
+igal vormil on vormi sulgemise nupp

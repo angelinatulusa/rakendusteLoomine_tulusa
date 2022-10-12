@@ -23,7 +23,7 @@ namespace rakendusteLoomine_tulusa
         Timer timer=new Timer { Interval = 1000 };//1000 чтобы таймер считал в секундах
         int[]num1=new int[4];
         int[]num2=new int[4];
-        Button start;
+        Button start,kinni;
         int punktid;
         Label p_arv;
         Button v_kord;
@@ -71,6 +71,15 @@ namespace rakendusteLoomine_tulusa
                 BackColor = System.Drawing.Color.LightSalmon,
                 Location = new System.Drawing.Point(300,100),
             };//nupp, mis näitab küsimusi ja käivitab taimeri
+            kinni = new Button
+            {
+                Text = "kinni",
+                AutoSize = false,
+                Size = new System.Drawing.Size(75, 50),
+                Font = new Font("Times New Roman", 10, FontStyle.Bold),
+                BackColor = System.Drawing.Color.LightCyan,
+                Location = new System.Drawing.Point(750, 50),
+            };
             l_nimed = new string[5, 4];
             timer.Enabled = true;
             v_kord.Click += V_kord_Click;//käivitusnupp "Teised tehed"
@@ -83,6 +92,8 @@ namespace rakendusteLoomine_tulusa
         {
             this.Controls.Clear();
             tableLayoutPanel.Controls.Clear();
+            this.Controls.Add(kinni);
+            kinni.Click += Kinni_Click;
             this.DoubleClick += Matem_DoubleClick;
             timer.Tick += Timer_Tick;
             for (int i = 0; i < 4; i++)
@@ -133,6 +144,12 @@ namespace rakendusteLoomine_tulusa
 
             this.Controls.Add(p_arv);
         }//kuvab näiteid ja taimerit
+
+        private void Kinni_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void V_kord_Click(object sender, EventArgs e)
         {
             Controls.Clear();
