@@ -22,6 +22,10 @@ namespace rakendusteLoomine_tulusa
 
         public Timer timer = new Timer { Interval = 500 };//время, спустя которое картинки пропадают, когда картинки не совпадают
 
+        Label timeLabel;
+        Timer timer2 = new Timer { Interval = 1000 };//1000 чтобы таймер считал в секундах
+        FlowLayoutPanel flowLayoutPanel1;
+
         Label firstClicked = null;
         Label secondClicked = null;
         Label keerukus;
@@ -78,6 +82,22 @@ namespace rakendusteLoomine_tulusa
                 Location = new System.Drawing.Point(285, 15),
                 Font = new Font("Arial", 30, FontStyle.Bold),
             };
+            timeLabel = new Label
+            {
+                Text = "aega veel: ",
+                AutoSize = true,
+                BorderStyle = BorderStyle.FixedSingle,
+                Size = new System.Drawing.Size(200, 30),
+                Font = new Font("Times New Roman", 18, FontStyle.Bold),
+            };
+            flowLayoutPanel1 = new FlowLayoutPanel
+            {
+                Dock = System.Windows.Forms.DockStyle.Fill,
+                FlowDirection = FlowDirection.RightToLeft,
+                AutoSize = true,
+                WrapContents = false,
+
+            };
             this.Controls.Add(keskmine);
             this.Controls.Add(lihtsalt);
             this.Controls.Add(raske);
@@ -100,6 +120,7 @@ namespace rakendusteLoomine_tulusa
                 "e", "e", "a", "a", "t", "t",
             };
 
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -141,6 +162,23 @@ namespace rakendusteLoomine_tulusa
                 iconLabel1.ForeColor = iconLabel1.BackColor;
                 iconLabel1.Click += Lbl1_Click;
             }
+            tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 0, 4);
+            flowLayoutPanel1.Controls.Add(timeLabel);
+            timer2.Enabled = true;
+            timer2.Tick += Timer2_Tick;
+
+        }
+        int tik=60;
+        private void Timer2_Tick(object sender, EventArgs e)
+        {
+            tik -= 1;
+            timeLabel.Text = tik.ToString();
+            if (tik==0)
+            {
+                MessageBox.Show("Sul sai aega otsa((", ":<");
+                this.Close();
+            }
+            
         }
 
         private void Keskmine_Click(object sender, EventArgs e)
@@ -153,6 +191,7 @@ namespace rakendusteLoomine_tulusa
                 "e", "e", "a", "a", "t", "t", "n", "n"
             };
 
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -195,6 +234,21 @@ namespace rakendusteLoomine_tulusa
                 iconLabel1.ForeColor = iconLabel1.BackColor;
                 iconLabel1.Click += Lbl1_Click;
             }
+            tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 0, 4);
+            flowLayoutPanel1.Controls.Add(timeLabel);
+            timer2.Enabled = true;
+            timer2.Tick += Timer2_Tick1;
+        }
+        int ttik = 120;
+        private void Timer2_Tick1(object sender, EventArgs e)
+        {
+            ttik -= 1;
+            timeLabel.Text = ttik.ToString();
+            if (ttik == 0)
+            {
+                MessageBox.Show("Sul sai aega otsa((", ":<");
+                this.Close();
+            }
         }
 
         private void Raske_Click(object sender, EventArgs e)
@@ -207,6 +261,7 @@ namespace rakendusteLoomine_tulusa
                 "e", "e", "a", "a", "t", "t", "n", "n","w","w"
             };
 
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -249,6 +304,21 @@ namespace rakendusteLoomine_tulusa
                 }
                 iconLabel1.ForeColor = iconLabel1.BackColor;
                 iconLabel1.Click += Lbl1_Click;
+            }
+            tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 0, 4);
+            flowLayoutPanel1.Controls.Add(timeLabel);
+            timer2.Enabled = true;
+            timer2.Tick += Timer2_Tick2;
+        }
+        int tikk=180;
+        private void Timer2_Tick2(object sender, EventArgs e)
+        {
+            tikk -= 1;
+            timeLabel.Text = tikk.ToString();
+            if (tikk == 0)
+            {
+                MessageBox.Show("Sul sai aega otsa((", ":<");
+                this.Close();
             }
         }
 

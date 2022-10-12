@@ -135,12 +135,10 @@ namespace rakendusteLoomine_tulusa
         }//kuvab näiteid ja taimerit
         private void V_kord_Click(object sender, EventArgs e)
         {
-
             Controls.Clear();
             start.Click += Start_Click;
             this.Controls.Add(start);
         }//tühjendab vormi ja käivitab Start
-
         int tik = 0;
         private void Matem_DoubleClick(object sender, EventArgs e)
         {
@@ -173,7 +171,7 @@ namespace rakendusteLoomine_tulusa
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
-            tik++;
+            tik+=1;
             timeLabel.Text=tik.ToString();
             if (Kontroll())
             {

@@ -8,7 +8,7 @@
 в форме с картинками сделать несколько вариантов с фоном разных цветов
 
 
-Что в итоге надо сделано:
+Что в итоге сделано:
 --------------------------------------------------------------------------------------------------------------------
 Piltide vaataja
 1.слайд-шоу в первую попробовать сделать
@@ -18,11 +18,11 @@ Piltide vaataja
 --------------------------------------------------------------------------------------------------------------------
 Matemaatika
 1.matemaatikas tehke "Start" nupp, mis käivitab vormi
-2.matemaatikas on nupp, mis loob uuesti küsimused
+2.matemaatikas on nupp, mis loob uuesti tehed
 3.olenevalt(в зависимости) ajast kirjutab messageboxis kui hea tulemus on
 
 --------------------------------------------------------------------------------------------------------------------
 Paarid
 1.tegin raskuse valiku
-2.muusikat lisada
-3.добавить время за которое надо найти все пары
+2.добавить попытки, если все попытки истрачены, то форма закрывается
+3.Kõigile kolmele raskusele lisandub aeg (erinev), mille jaoks peate leidma kõik paarid

@@ -14,11 +14,12 @@ namespace rakendusteLoomine_tulusa
     {
         TableLayoutPanel tableLayoutPanel1;
         PictureBox pictureBox;
-        Button close, clear, show;
+        Button close, clear, show, next, back;
         CheckBox stretch;
         FlowLayoutPanel flowLayoutPanel1;
         OpenFileDialog openFileDialog;
-        RadioButton center;
+        CheckBox center;
+        string picture = "valge";//muutuja, et kontrollida, milline pilt parajasti ekraanil on
         public piltideVaataja()
         {
             Height = 500;
@@ -42,38 +43,40 @@ namespace rakendusteLoomine_tulusa
             this.Controls.Add(tableLayoutPanel1);
             pictureBox = new System.Windows.Forms.PictureBox
             {
-                //Image = new Bitmap(@"..\..\kass.png"),
+                Image = new Bitmap(@"..\..\valge.jpg"),
                 BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D,
                 Dock = System.Windows.Forms.DockStyle.Fill,
                 Location = new System.Drawing.Point(2, 2),
-                TabIndex=0,
-                TabStop=false,
-                Size = new System.Drawing.Size(200,200) 
+                TabIndex = 0,
+                TabStop = false,
+                //Size = new System.Drawing.Size(200,200) 
             };
             tableLayoutPanel1.Controls.Add(pictureBox, 0, 0);
             tableLayoutPanel1.SetCellPosition(pictureBox, new TableLayoutPanelCellPosition(0, 0));
             tableLayoutPanel1.SetColumnSpan(pictureBox, 2);
             stretch = new CheckBox
             {
-                Text= "stretch"
+                Text = "stretch"
             };
             stretch.CheckedChanged += Stretch_CheckedChanged;
             tableLayoutPanel1.Controls.Add(stretch, 0, 1);
-            close = new Button{Text = "sule"};
-            clear = new Button{Text = "kustuta"};
-            show = new Button{Text = "näita"};
-            center = new RadioButton { Text = "keskusesse" };
+            close = new Button { Text = "sule" };
+            clear = new Button { Text = "kustuta" };
+            show = new Button { Text = "näita" };
+            next = new Button { Text = "järgmiseks" };
+            back = new Button { Text = "eelmine" };
+            center = new CheckBox { Text = "keskusesse" };
             close.Click += Tegevus;
             clear.Click += Tegevus;
             show.Click += Tegevus;
             center.CheckedChanged += new EventHandler(R_Tegevus);
-            Button[] buttons = {clear, show, close};
+            Button[] buttons = { clear, show, close };
             flowLayoutPanel1 = new FlowLayoutPanel
             {
                 Dock = System.Windows.Forms.DockStyle.Fill,
-                FlowDirection=FlowDirection.RightToLeft,
-                AutoSize=true,
-                WrapContents=false,
+                FlowDirection = FlowDirection.RightToLeft,
+                AutoSize = true,
+                WrapContents = false,
                 //AutoScroll=true,
 
             };
@@ -82,17 +85,73 @@ namespace rakendusteLoomine_tulusa
                 flowLayoutPanel1.Controls.Add(button);
             }
             flowLayoutPanel1.Controls.Add(center);
+            tableLayoutPanel1.Controls.Add(next, 1, 2);
+            tableLayoutPanel1.Controls.Add(back, 1, 1);
             tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 1, 1);
             this.Controls.Add(flowLayoutPanel1);
-            
+            next.Click += Next_Click;
+            back.Click += Back_Click;
+
+
+         }
+        private void Back_Click(object sender, EventArgs e)
+        {
+            if (picture == "valge")
+            {
+                pictureBox.Image = new Bitmap(@"..\..\neponimausii.jpg");
+                picture = "neponimausii";
+            }
+            else if (picture == "neponimausii")
+            {
+                pictureBox.Image = new Bitmap(@"..\..\kot.jpg");
+                picture = "kot";
+            }
+            else if (picture == "kot")
+            {
+                pictureBox.Image = new Bitmap(@"..\..\kass.png");
+                picture = "kass";
+            }
+            else
+            {
+                pictureBox.Image = new Bitmap(@"..\..\valge.jpg");
+                picture = "valge";
+            }
+
         }
+        private void Next_Click(object sender, EventArgs e)
+        {
+            if (picture=="valge")
+            {
+                pictureBox.Image = new Bitmap(@"..\..\kass.png");
+                picture = "kass";
+            }
+            else if (picture=="kass")
+            {
+                pictureBox.Image = new Bitmap(@"..\..\kot.jpg");
+                picture = "kot";
+            }
+            else if (picture == "kot")
+            {
+                pictureBox.Image = new Bitmap(@"..\..\neponimausii.jpg");
+                picture = "neponimausii";
+            }
+            else
+            {
+                pictureBox.Image = new Bitmap(@"..\..\valge.jpg");
+                picture = "valge";
+            }
+
+        }
+
         private void R_Tegevus(object sender, EventArgs e)
         {
-            RadioButton radio_sender = (RadioButton)sender;
-            if (radio_sender.Text == "keskusesse")
+            if (center.Checked)
             {
                 pictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
-                center.Checked = false;
+            }
+            else
+            {
+                pictureBox.SizeMode = PictureBoxSizeMode.Normal;
             }
         }
         private void Tegevus(object sender, EventArgs e)

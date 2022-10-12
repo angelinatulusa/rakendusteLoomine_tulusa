@@ -99,8 +99,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="kass.png" />
+    <Content Include="kot.jpg" />
     <Content Include="laul1.wav" />
+    <Content Include="neponimausii.jpg" />
     <Content Include="readme.txt" />
+    <Content Include="valge.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
