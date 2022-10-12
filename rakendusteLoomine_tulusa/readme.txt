@@ -12,8 +12,8 @@
 --------------------------------------------------------------------------------------------------------------------
 Piltide vaataja
 1.slaidiseanss
-2.muusikat lisada
-3.proovi lisada pildi suuruse muutmise võimalus olenevalt raadionupust
+2.pane pilt keskele
+3.saate pilti suurendada ja vähendada
 
 --------------------------------------------------------------------------------------------------------------------
 Matemaatika

@@ -14,16 +14,17 @@ namespace rakendusteLoomine_tulusa
     {
         TableLayoutPanel tableLayoutPanel1;
         PictureBox pictureBox;
-        Button close, clear, show, next, back,kinni;
+        Button close, clear, show, next, back,rohkem,vahem;
         CheckBox stretch;
         FlowLayoutPanel flowLayoutPanel1;
         OpenFileDialog openFileDialog;
         CheckBox center;
+        Bitmap suurus;
         string picture = "valge";//muutuja, et kontrollida, milline pilt parajasti ekraanil on
         public piltideVaataja()
         {
-            Height = 500;
-            Width = 1150;
+            Height = 450;
+            Width = 1200;
             Text = "piltide vaataja";
             openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All files (*.*)|*.*";
@@ -65,21 +66,16 @@ namespace rakendusteLoomine_tulusa
             show = new Button { Text = "näita" };
             next = new Button { Text = "järgmiseks" };
             back = new Button { Text = "eelmine" };
-            kinni = new Button
-            {
-                Text = "kinni",
-                AutoSize = false,
-                Size = new System.Drawing.Size(75, 50),
-                Font = new Font("Times New Roman", 10, FontStyle.Bold),
-                BackColor = System.Drawing.Color.LightCyan,
-                Location = new System.Drawing.Point(800, 50),
-            };
             center = new CheckBox { Text = "keskusesse" };
+            rohkem = new Button { Text = "suurendama" };
+            vahem = new Button { Text = "vähenema" };
             close.Click += Tegevus;
             clear.Click += Tegevus;
             show.Click += Tegevus;
+            rohkem.Click += Tegevus;
+            vahem.Click += Tegevus;
             center.CheckedChanged += new EventHandler(R_Tegevus);
-            Button[] buttons = { clear, show, close };
+            Button[] buttons = { clear, show, close, rohkem, vahem };
             flowLayoutPanel1 = new FlowLayoutPanel
             {
                 Dock = System.Windows.Forms.DockStyle.Fill,
@@ -98,41 +94,46 @@ namespace rakendusteLoomine_tulusa
             tableLayoutPanel1.Controls.Add(next, 1, 2);
             tableLayoutPanel1.Controls.Add(back, 1, 1);
             tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 1, 1);
-            tableLayoutPanel1.Controls.Add(kinni, 2, 1);
             this.Controls.Add(flowLayoutPanel1);
             next.Click += Next_Click;
             back.Click += Back_Click;
-            kinni.Click+=Kinni_Click;
-
-
          }
-
-        private void Kinni_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
+        int l = 0;//pilti laius
+        int k = 0;//pilti kõrgus
         private void Back_Click(object sender, EventArgs e)
         {
             if (picture == "valge")
             {
                 pictureBox.Image = new Bitmap(@"..\..\neponimausii.jpg");
                 picture = "neponimausii";
+                l = 200;
+                k = 250;
+                suurus = new Bitmap(pictureBox.Image, l, k);
+
             }
             else if (picture == "neponimausii")
             {
                 pictureBox.Image = new Bitmap(@"..\..\kot.jpg");
                 picture = "kot";
+                l = 200;
+                k = 200;
+                suurus = new Bitmap(pictureBox.Image, l, k);
             }
             else if (picture == "kot")
             {
                 pictureBox.Image = new Bitmap(@"..\..\kass.png");
                 picture = "kass";
+                l = 200;
+                k = 260;
+                suurus = new Bitmap(pictureBox.Image, l, k);
             }
             else
             {
                 pictureBox.Image = new Bitmap(@"..\..\valge.jpg");
                 picture = "valge";
+                l = 1200;
+                k = 550;
+                suurus = new Bitmap(pictureBox.Image, l, k);
             }
 
         }
@@ -142,25 +143,36 @@ namespace rakendusteLoomine_tulusa
             {
                 pictureBox.Image = new Bitmap(@"..\..\kass.png");
                 picture = "kass";
+                l = 200;
+                k = 200;
+                suurus = new Bitmap(pictureBox.Image, l, k);
             }
             else if (picture=="kass")
             {
                 pictureBox.Image = new Bitmap(@"..\..\kot.jpg");
                 picture = "kot";
+                l = 200;
+                k = 200;
+                suurus = new Bitmap(pictureBox.Image, l, k);
             }
             else if (picture == "kot")
             {
                 pictureBox.Image = new Bitmap(@"..\..\neponimausii.jpg");
                 picture = "neponimausii";
+                l = 200;
+                k = 250;
+                suurus = new Bitmap(pictureBox.Image, l, k);
             }
             else
             {
                 pictureBox.Image = new Bitmap(@"..\..\valge.jpg");
                 picture = "valge";
+                l = 1200;
+                k = 550;
+                suurus = new Bitmap(pictureBox.Image, l, k);
             }
 
         }
-
         private void R_Tegevus(object sender, EventArgs e)
         {
             if (center.Checked)
@@ -189,6 +201,22 @@ namespace rakendusteLoomine_tulusa
             else if (nupp_sender.Text=="sule")
             {
                 this.Close();
+            }
+            else if (nupp_sender.Text == "suurendama")
+            {
+                l += 20;
+                k += 20;
+                suurus = new Bitmap(pictureBox.Image, l,k); //Muudab pildi suurust vastavalt etteantud parameetritele
+                pictureBox.Image = suurus;
+                pictureBox.Show();
+            }
+            else if (nupp_sender.Text == "vähenema")
+            {
+                l -= 20;
+                k -= 20;
+                suurus = new Bitmap(pictureBox.Image, l, k); //Muudab pildi suurust vastavalt etteantud parameetritele
+                pictureBox.Image = suurus;
+                pictureBox.Show();
             }
         }
         private void Stretch_CheckedChanged(object sender, EventArgs e)
