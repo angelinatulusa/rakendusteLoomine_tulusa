@@ -1,14 +1,3 @@
-﻿Идеи:
-1. matemaatikas tehke "Start" nupp, mis käivitab vormi
-2. teha keerulisem versioon (ja võimalik on ka lihtsustatud variant) kolmandal kujul
-3. proovi lisada pildi suuruse muutmise võimalus olenevalt raadionupust
-4. muusikat lisada
-в математику сделать возможноcть еще раз сгенерировать примерыб выбраться сложность,добавить очки
-слайд-шоу в первую попробовать сделать
-в форме с картинками сделать несколько вариантов с фоном разных цветов
-
-
-Что в итоге сделано:
 --------------------------------------------------------------------------------------------------------------------
 Piltide vaataja
 1.slaidiseanss
