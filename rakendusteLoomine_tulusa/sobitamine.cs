@@ -22,9 +22,8 @@ namespace rakendusteLoomine_tulusa
 
         public Timer timer = new Timer { Interval = 500 };//время, спустя которое картинки пропадают, когда картинки не совпадают
 
-        Label timeLabel;
+        Label timeLabel,time,katse,katseLabel;
         Timer timer2 = new Timer { Interval = 1000 };//1000 чтобы таймер считал в секундах
-        FlowLayoutPanel flowLayoutPanel1;
 
         Label firstClicked = null;
         Label secondClicked = null;
@@ -41,7 +40,6 @@ namespace rakendusteLoomine_tulusa
             {
                 ColumnCount = 4,
                 Location = new System.Drawing.Point(3, 4),
-                //Name = "tableLayoutPanel1",
                 RowCount = 4,
                 Size = new System.Drawing.Size(550, 550),
                 TabIndex = 0,
@@ -91,21 +89,37 @@ namespace rakendusteLoomine_tulusa
                 BackColor = System.Drawing.Color.LightCyan,
                 Location = new System.Drawing.Point(800, 50),
             };
+            katseLabel = new Label
+            {
+                Text = "veel katsed: ",
+                AutoSize = true,
+                Size = new System.Drawing.Size(200, 30),
+                Font = new Font("Times New Roman", 21, FontStyle.Bold),
+                Location = new System.Drawing.Point(600, 25),
+            };
+            katse = new Label
+            {
+                Text = "80",
+                AutoSize = true,
+                Size = new System.Drawing.Size(200, 30),
+                Font = new Font("Times New Roman", 21, FontStyle.Bold),
+                Location = new System.Drawing.Point(755, 25),
+            };
+            time = new Label
+            {
+                Text = "aega veel:",
+                AutoSize = true,
+                Size = new System.Drawing.Size(200, 30),
+                Font = new Font("Times New Roman", 21, FontStyle.Bold),
+                Location = new System.Drawing.Point(600, 55),
+            };
             timeLabel = new Label
             {
-                Text = "aega veel: ",
+                Text = "0",
                 AutoSize = true,
-                BorderStyle = BorderStyle.FixedSingle,
                 Size = new System.Drawing.Size(200, 30),
                 Font = new Font("Times New Roman", 18, FontStyle.Bold),
-            };
-            flowLayoutPanel1 = new FlowLayoutPanel
-            {
-                Dock = System.Windows.Forms.DockStyle.Fill,
-                FlowDirection = FlowDirection.RightToLeft,
-                AutoSize = true,
-                WrapContents = false,
-
+                Location = new System.Drawing.Point(725, 60),
             };
             this.Controls.Add(keskmine);
             this.Controls.Add(lihtsalt);
@@ -124,6 +138,13 @@ namespace rakendusteLoomine_tulusa
             this.Controls.Clear();
             this.Controls.Add(kinni);
             kinni.Click += Kinni_Click;
+            this.Controls.Add(katseLabel);
+            this.Controls.Add(katse);
+            this.Controls.Add(time);
+            this.Controls.Add(timeLabel);
+            timer2.Enabled = true;
+            timer2.Tick += Timer2_Tick;
+
             this.Controls.Add(this.tableLayoutPanel1);
             List<string> icons = new List<string>()//иконки(картинки), которым надо искать пару
             {
@@ -173,10 +194,6 @@ namespace rakendusteLoomine_tulusa
                 iconLabel1.ForeColor = iconLabel1.BackColor;
                 iconLabel1.Click += Lbl1_Click;
             }
-            tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 0, 4);
-            flowLayoutPanel1.Controls.Add(timeLabel);
-            timer2.Enabled = true;
-            timer2.Tick += Timer2_Tick;
 
         }
 
@@ -203,6 +220,13 @@ namespace rakendusteLoomine_tulusa
             this.Controls.Clear();
             this.Controls.Add(kinni);
             kinni.Click += Kinni_Click;
+            this.Controls.Add(katseLabel);
+            this.Controls.Add(katse);
+            this.Controls.Add(time);
+            this.Controls.Add(timeLabel);
+            timer2.Enabled = true;
+            timer2.Tick += Timer2_Tick1;
+
             this.Controls.Add(this.tableLayoutPanel1);
             List<string> icons = new List<string>()//иконки(картинки), которым надо искать пару
             {
@@ -253,10 +277,6 @@ namespace rakendusteLoomine_tulusa
                 iconLabel1.ForeColor = iconLabel1.BackColor;
                 iconLabel1.Click += Lbl1_Click;
             }
-            tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 0, 4);
-            flowLayoutPanel1.Controls.Add(timeLabel);
-            timer2.Enabled = true;
-            timer2.Tick += Timer2_Tick1;
         }
         int ttik = 120;
         private void Timer2_Tick1(object sender, EventArgs e)
@@ -275,6 +295,13 @@ namespace rakendusteLoomine_tulusa
             this.Controls.Clear();
             this.Controls.Add(kinni);
             kinni.Click += Kinni_Click;
+            this.Controls.Add(katseLabel);
+            this.Controls.Add(katse);
+            this.Controls.Add(time);
+            this.Controls.Add(timeLabel);
+            timer2.Enabled = true;
+            timer2.Tick += Timer2_Tick2;
+
             this.Controls.Add(this.tableLayoutPanel1);
             List<string> icons = new List<string>()//иконки(картинки), которым надо искать пару
             {
@@ -326,10 +353,6 @@ namespace rakendusteLoomine_tulusa
                 iconLabel1.ForeColor = iconLabel1.BackColor;
                 iconLabel1.Click += Lbl1_Click;
             }
-            tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 0, 4);
-            flowLayoutPanel1.Controls.Add(timeLabel);
-            timer2.Enabled = true;
-            timer2.Tick += Timer2_Tick2;
         }
         int tikk=180;
         private void Timer2_Tick2(object sender, EventArgs e)
@@ -353,8 +376,16 @@ namespace rakendusteLoomine_tulusa
             firstClicked = null;
             secondClicked = null;
         }
+        int katsed = 80;
         private void Lbl1_Click(object sender, EventArgs e)
         {
+            katsed -= 1;
+            katse.Text = katsed.ToString();
+            if (katsed == 0)
+            {
+                MessageBox.Show("Sul pole enam katseid((", ":<");
+                this.Close();
+            }
             if (timer.Enabled == true)
                 return;
 
@@ -386,6 +417,7 @@ namespace rakendusteLoomine_tulusa
 
                 timer.Start();
             }
+            
         }
         public void CheckForWinner()
         {
