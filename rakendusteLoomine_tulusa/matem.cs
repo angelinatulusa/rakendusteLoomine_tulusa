@@ -19,12 +19,12 @@ namespace rakendusteLoomine_tulusa
         string[,] l_nimed;
         string[] tehed = new string[4] { "+", "-", "/", "*" };
         string text;
-        Timer timer=new Timer { Interval = 1000 };//1000 чтобы таймер считал в секундах
+        Timer timer;//1000 чтобы таймер считал в секундах
         int[]num1=new int[4];
         int[]num2=new int[4];
         Button start,kinni;
         int punktid;
-        Label p_arv;
+        Label hoiatus;
         Button v_kord;
         public matem()
         {
@@ -45,11 +45,11 @@ namespace rakendusteLoomine_tulusa
                 Size = new System.Drawing.Size(200, 30),
                 Font = new Font("Times New Roman", 20, FontStyle.Bold)
             };
-            p_arv = new Label
+            hoiatus = new Label
             {
-                Text = "Sinu punktid: ",
-                Size = new System.Drawing.Size(200, 30),
-                Font = new Font("Times New Roman", 15, FontStyle.Bold),
+                Text = "HOIATUS! Iga nupuvajutusega läheb sekund ja teie tulemused on selle jaoks halvemad!!",
+                Size = new System.Drawing.Size(625, 30),
+                Font = new Font("Times New Roman", 12),
                 Location = new System.Drawing.Point(125,28)
             };
             v_kord=new Button
@@ -88,6 +88,8 @@ namespace rakendusteLoomine_tulusa
             //tik=0;
             this.Controls.Clear();
             tableLayoutPanel.Controls.Clear();
+            timer = new Timer { Interval = 1000 };
+            timer.Start();
             timer.Enabled = true;
             timer.Tick += Timer_Tick;
             this.Controls.Add(kinni);
@@ -137,8 +139,6 @@ namespace rakendusteLoomine_tulusa
             this.Controls.Add(timeLabel);
             
             this.Controls.Add(v_kord);
-
-            this.Controls.Add(p_arv);
         }//kuvab näiteid ja taimerit
 
         private void Kinni_Click(object sender, EventArgs e)
@@ -148,16 +148,16 @@ namespace rakendusteLoomine_tulusa
         int tik = 0;
         private void V_kord_Click(object sender, EventArgs e)
         {
-            
             this.Controls.Clear();
             tableLayoutPanel.Controls.Clear();
             timer.Stop();
+            timer = new Timer { Interval = 100 };
             start.Click += Start_Click;
             this.Controls.Add(start);
         }//tühjendab vormi ja käivitab Start
         private void Matem_DoubleClick(object sender, EventArgs e)
         {
-            timer.Start();
+            //timer.Start();
             timeLabel.Text = timer.ToString();
             tableLayoutPanel.Controls.Add(timeLabel);
         }
@@ -173,21 +173,10 @@ namespace rakendusteLoomine_tulusa
             }
             else { return false; }
         }
-        private void Punktid()
-        {
-            if (num1[0] + num2[0] == vastused[0].Value
-                || num1[1] - num2[1] == vastused[1].Value
-                || num1[2] / num2[2] == vastused[2].Value
-                || num1[3] * num2[3] == vastused[3].Value)
-            {
-                punktid+=10;
-                p_arv.Text = punktid.ToString();
-            }
-        }
         private void Timer_Tick(object sender, EventArgs e)
         {
-            tik+=1;
-            timeLabel.Text=tik.ToString();
+            tik +=1;
+            timeLabel.Text="aega veel:"+tik.ToString();
             if (Kontroll())
             {
                 timer.Stop();

@@ -16,6 +16,7 @@ Paarid
 1.tegin raskuse valiku
 2.lisas klõpsude (katsete) arvu, mille jaoks peate leidma kõik paarid, kui teil pole aega, ilmub mesagebox ja vorm sulgub
 3.Kõigile kolmele raskusele lisandub aeg (erinev), mille jaoks peate leidma kõik paarid
+4.Kui sa võidad või kaotad, mängitakse muusikat (mitmesugust)
 
 --------------------------------------------------------------------------------------------------------------------
 igal vormil on vormi sulgemise nupp

@@ -148,7 +148,7 @@ namespace rakendusteLoomine_tulusa
             this.Controls.Add(this.tableLayoutPanel1);
             List<string> icons = new List<string>()//иконки(картинки), которым надо искать пару
             {
-                "?", "?", "k", "k", "v", "v", "u", "u",
+                "?", "?", "k", "k", "v", "v", 
                 "e", "e", "a", "a", "t", "t",
             };
 
@@ -214,7 +214,6 @@ namespace rakendusteLoomine_tulusa
             }
             
         }
-
         private void Keskmine_Click(object sender, EventArgs e)
         {
             this.Controls.Clear();
@@ -383,8 +382,12 @@ namespace rakendusteLoomine_tulusa
             katse.Text = katsed.ToString();
             if (katsed == 0)
             {
-                MessageBox.Show("Sul pole enam katseid((", ":<");
-                this.Close();
+                using(var muusika=new SoundPlayer(@"..\..\lose.wav"))
+                {
+                    muusika.Play();
+                    MessageBox.Show("Sul pole enam katseid((", ":<");
+                    this.Close();
+                }
             }
             if (timer.Enabled == true)
                 return;
@@ -431,8 +434,12 @@ namespace rakendusteLoomine_tulusa
                         return;
                 }
             }
-            MessageBox.Show("Sa leised kõik paarid!!!", "Palju õnne!");
-            Close();
+            using(var muusik=new SoundPlayer(@"..\..\win.wav"))
+            {
+                muusik.Play();
+                MessageBox.Show("Sa leised kõik paarid!!!", "Palju õnne!");
+                this.Close();
+            }
         }
     }
 }

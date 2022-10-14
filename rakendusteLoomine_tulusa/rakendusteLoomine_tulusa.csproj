@@ -100,9 +100,11 @@
   <ItemGroup>
     <Content Include="kass.png" />
     <Content Include="kot.jpg" />
+    <Content Include="lose.wav" />
     <Content Include="neponimausii.jpg" />
     <Content Include="readme.txt" />
     <Content Include="valge.jpg" />
+    <Content Include="win.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
