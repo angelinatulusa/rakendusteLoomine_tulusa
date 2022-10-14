@@ -12,7 +12,6 @@ namespace rakendusteLoomine_tulusa
 {
     public partial class matem : Form
     {
-        
         Random random = new Random();
         Label timeLabel;
         TableLayoutPanel tableLayoutPanel;
@@ -29,7 +28,6 @@ namespace rakendusteLoomine_tulusa
         Button v_kord;
         public matem()
         {
-            
             this.Size = new Size(850, 300);
             tableLayoutPanel = new TableLayoutPanel
             {
@@ -81,21 +79,20 @@ namespace rakendusteLoomine_tulusa
                 Location = new System.Drawing.Point(750, 50),
             };
             l_nimed = new string[5, 4];
-            timer.Enabled = true;
             v_kord.Click += V_kord_Click;//käivitusnupp "Teised tehed"
             start.Click += Start_Click;//käivitusnupp "Start"
             this.Controls.Add(start);
-            
-
         }
         public void Start_Click(object sender, EventArgs e)
         {
+            //tik=0;
             this.Controls.Clear();
             tableLayoutPanel.Controls.Clear();
+            timer.Enabled = true;
+            timer.Tick += Timer_Tick;
             this.Controls.Add(kinni);
             kinni.Click += Kinni_Click;
             this.DoubleClick += Matem_DoubleClick;
-            timer.Tick += Timer_Tick;
             for (int i = 0; i < 4; i++)
             {
                 tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -134,7 +131,6 @@ namespace rakendusteLoomine_tulusa
                         Label l = new Label { Text = text };
                         tableLayoutPanel.Controls.Add(l, j, i);
                     }
-
                 }
             }
             this.Controls.Add(tableLayoutPanel);
@@ -149,14 +145,16 @@ namespace rakendusteLoomine_tulusa
         {
             this.Close();
         }
-
+        int tik = 0;
         private void V_kord_Click(object sender, EventArgs e)
         {
-            Controls.Clear();
+            
+            this.Controls.Clear();
+            tableLayoutPanel.Controls.Clear();
+            timer.Stop();
             start.Click += Start_Click;
             this.Controls.Add(start);
         }//tühjendab vormi ja käivitab Start
-        int tik = 0;
         private void Matem_DoubleClick(object sender, EventArgs e)
         {
             timer.Start();
@@ -165,7 +163,7 @@ namespace rakendusteLoomine_tulusa
         }
         private bool Kontroll()
         {
-            timeLabel.Text = tik.ToString();
+            //timeLabel.Text = tik.ToString();
             if (num1[0] + num2[0] == vastused[0].Value 
                 && num1[1] - num2[1] == vastused[1].Value 
                 && num1[2] / num2[2] == vastused[2].Value 

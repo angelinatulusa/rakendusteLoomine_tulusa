@@ -15,16 +15,17 @@ namespace rakendusteLoomine_tulusa
         TableLayoutPanel tableLayoutPanel1;
         PictureBox pictureBox;
         Button close, clear, show, next, back,rohkem,vahem;
-        CheckBox stretch;
+        CheckBox stretch,rotate;
         FlowLayoutPanel flowLayoutPanel1;
         OpenFileDialog openFileDialog;
         CheckBox center;
         Bitmap suurus;
+        TextBox labipaistvus;
         string picture = "valge";//muutuja, et kontrollida, milline pilt parajasti ekraanil on
         public piltideVaataja()
         {
             Height = 450;
-            Width = 1200;
+            Width = 1450;
             Text = "piltide vaataja";
             openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All files (*.*)|*.*";
@@ -55,10 +56,8 @@ namespace rakendusteLoomine_tulusa
             tableLayoutPanel1.Controls.Add(pictureBox, 0, 0);
             tableLayoutPanel1.SetCellPosition(pictureBox, new TableLayoutPanelCellPosition(0, 0));
             tableLayoutPanel1.SetColumnSpan(pictureBox, 2);
-            stretch = new CheckBox
-            {
-                Text = "stretch"
-            };
+            stretch = new CheckBox { Text = "stretch" };
+            rotate = new CheckBox { Text = "järgmise/eelmise pildi pöörata" };
             stretch.CheckedChanged += Stretch_CheckedChanged;
             tableLayoutPanel1.Controls.Add(stretch, 0, 1);
             close = new Button { Text = "sule" };
@@ -69,6 +68,7 @@ namespace rakendusteLoomine_tulusa
             center = new CheckBox { Text = "keskusesse" };
             rohkem = new Button { Text = "suurendama" };
             vahem = new Button { Text = "vähenema" };
+            labipaistvus = new TextBox { Text = "läbipaistvus" };
             close.Click += Tegevus;
             clear.Click += Tegevus;
             show.Click += Tegevus;
@@ -89,10 +89,11 @@ namespace rakendusteLoomine_tulusa
             {
                 flowLayoutPanel1.Controls.Add(button);
             }
-
             flowLayoutPanel1.Controls.Add(center);
+            flowLayoutPanel1.Controls.Add(labipaistvus);
             tableLayoutPanel1.Controls.Add(next, 1, 2);
-            tableLayoutPanel1.Controls.Add(back, 1, 1);
+            tableLayoutPanel1.Controls.Add(rotate, 1, 1);
+            tableLayoutPanel1.Controls.Add(back, 0, 2);
             tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 1, 1);
             this.Controls.Add(flowLayoutPanel1);
             next.Click += Next_Click;
@@ -108,6 +109,10 @@ namespace rakendusteLoomine_tulusa
                 picture = "neponimausii";
                 l = 200;
                 k = 250;
+                if (rotate.Checked == true)
+                {
+                    pictureBox.Image.RotateFlip(RotateFlipType.Rotate90FlipY);
+                }
                 suurus = new Bitmap(pictureBox.Image, l, k);
 
             }
@@ -117,6 +122,10 @@ namespace rakendusteLoomine_tulusa
                 picture = "kot";
                 l = 200;
                 k = 200;
+                if (rotate.Checked == true)
+                {
+                    pictureBox.Image.RotateFlip(RotateFlipType.Rotate90FlipY);
+                }
                 suurus = new Bitmap(pictureBox.Image, l, k);
             }
             else if (picture == "kot")
@@ -125,6 +134,10 @@ namespace rakendusteLoomine_tulusa
                 picture = "kass";
                 l = 200;
                 k = 260;
+                if (rotate.Checked == true)
+                {
+                    pictureBox.Image.RotateFlip(RotateFlipType.Rotate90FlipY);
+                }
                 suurus = new Bitmap(pictureBox.Image, l, k);
             }
             else
@@ -145,6 +158,10 @@ namespace rakendusteLoomine_tulusa
                 picture = "kass";
                 l = 200;
                 k = 200;
+                if (rotate.Checked==true)
+                {
+                    pictureBox.Image.RotateFlip(RotateFlipType.Rotate90FlipY);
+                }
                 suurus = new Bitmap(pictureBox.Image, l, k);
             }
             else if (picture=="kass")
@@ -153,6 +170,10 @@ namespace rakendusteLoomine_tulusa
                 picture = "kot";
                 l = 200;
                 k = 200;
+                if (rotate.Checked == true)
+                {
+                    pictureBox.Image.RotateFlip(RotateFlipType.Rotate90FlipY);
+                }
                 suurus = new Bitmap(pictureBox.Image, l, k);
             }
             else if (picture == "kot")
@@ -161,6 +182,10 @@ namespace rakendusteLoomine_tulusa
                 picture = "neponimausii";
                 l = 200;
                 k = 250;
+                if (rotate.Checked == true)
+                {
+                    pictureBox.Image.RotateFlip(RotateFlipType.Rotate90FlipY);
+                }
                 suurus = new Bitmap(pictureBox.Image, l, k);
             }
             else
@@ -206,7 +231,7 @@ namespace rakendusteLoomine_tulusa
             {
                 l += 20;
                 k += 20;
-                suurus = new Bitmap(pictureBox.Image, l,k); //Muudab pildi suurust vastavalt etteantud parameetritele
+                suurus = new Bitmap(pictureBox.Image, l,k); //muuda pildi suurust, muuta see suuremaks
                 pictureBox.Image = suurus;
                 pictureBox.Show();
             }
@@ -214,7 +239,7 @@ namespace rakendusteLoomine_tulusa
             {
                 l -= 20;
                 k -= 20;
-                suurus = new Bitmap(pictureBox.Image, l, k); //Muudab pildi suurust vastavalt etteantud parameetritele
+                suurus = new Bitmap(pictureBox.Image, l, k); //muuda pildi suurust, muuta see väiksemaks
                 pictureBox.Image = suurus;
                 pictureBox.Show();
             }

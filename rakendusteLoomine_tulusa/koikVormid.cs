@@ -33,7 +33,7 @@ namespace rakendusteLoomine_tulusa
             };
             parid = new Button()
             {
-                Text="parid",
+                Text="paarid",
                 Location = new System.Drawing.Point(400, 125),
                 Size = new System.Drawing.Size(100, 50),
                 BackColor = Color.LightGoldenrodYellow,
