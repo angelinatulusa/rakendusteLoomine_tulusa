@@ -15,15 +15,16 @@ namespace rakendusteLoomine_tulusa
         TableLayoutPanel tableLayoutPanel1;
         PictureBox pictureBox;
         Button close, clear, show, next, back,rohkem,vahem;
-        CheckBox stretch,rotate,center,SlaisdiSeanss;
+        CheckBox stretch, rotate, center;
         FlowLayoutPanel flowLayoutPanel1;
         OpenFileDialog openFileDialog;
         Bitmap suurus;
+        public Timer timer = new Timer { Interval = 2000 };
         string picture = "valge";//muutuja, et kontrollida, milline pilt parajasti ekraanil on
         public piltideVaataja()
         {
             Height = 450;
-            Width = 1300;
+            Width = 1310;
             Text = "piltide vaataja";
             openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All files (*.*)|*.*";
@@ -33,6 +34,7 @@ namespace rakendusteLoomine_tulusa
                 ColumnCount = 2,
                 RowCount = 2,
                 Location = new System.Drawing.Point(20, 0),
+                BackColor = System.Drawing.Color.LightGray,
                 Size = new System.Drawing.Size(300, 400),
                 TabIndex = 0,
             };
@@ -57,15 +59,63 @@ namespace rakendusteLoomine_tulusa
             rotate = new CheckBox { Text = "pöörata 90°" };
             stretch.CheckedChanged += Stretch_CheckedChanged;
             tableLayoutPanel1.Controls.Add(stretch, 0, 1);
-            close = new Button { Text = "sule" };
-            clear = new Button { Text = "kustuta" };
-            show = new Button { Text = "näita" };
-            next = new Button { Text = "järgmiseks" };
-            back = new Button { Text = "eelmine" };
+            close = new Button
+            {
+                Text = "sule",
+                AutoSize = true,
+                Font = new Font("Times New Roman", 10, FontStyle.Bold),
+                BackColor = System.Drawing.Color.LightCoral,
+                Location = new System.Drawing.Point(800, 50),
+            };
+            clear = new Button
+            {
+                Text = "kustuta",
+                AutoSize = true,
+                Font = new Font("Times New Roman", 10, FontStyle.Bold),
+                BackColor = System.Drawing.Color.LightCoral,
+                Location = new System.Drawing.Point(800, 50),
+            };
+            show = new Button
+            {
+                Text = "näita",
+                AutoSize = true,
+                Font = new Font("Times New Roman", 10, FontStyle.Bold),
+                BackColor = System.Drawing.Color.LightCyan,
+                Location = new System.Drawing.Point(800, 50),
+            };
+            next = new Button
+            {
+                Text = "järgmiseks",
+                AutoSize = true,
+                Font = new Font("Times New Roman", 10, FontStyle.Bold),
+                BackColor = System.Drawing.Color.LightGoldenrodYellow,
+                Location = new System.Drawing.Point(800, 50),
+            };
+            back = new Button
+            {
+                Text = "eelmine",
+                AutoSize = true,
+                Font = new Font("Times New Roman", 10, FontStyle.Bold),
+                BackColor = System.Drawing.Color.LightGoldenrodYellow,
+                Location = new System.Drawing.Point(800, 50),
+            };
             center = new CheckBox { Text = "keskusesse" };
-            SlaisdiSeanss=new CheckBox { Text = "slaidiseanss" };
-            rohkem = new Button { Text = "suurendama" };
-            vahem = new Button { Text = "vähenema" };
+            rohkem = new Button
+            {
+                Text = "suurendama",
+                AutoSize = true,
+                Font = new Font("Times New Roman", 10, FontStyle.Bold),
+                BackColor = System.Drawing.Color.LightGreen,
+                Location = new System.Drawing.Point(800, 50),
+            };
+            vahem = new Button
+            {
+                Text = "vähenema",
+                AutoSize = true,
+                Font = new Font("Times New Roman", 10, FontStyle.Bold),
+                BackColor = System.Drawing.Color.LightPink,
+                Location = new System.Drawing.Point(800, 50),
+            };
             close.Click += Tegevus;
             clear.Click += Tegevus;
             show.Click += Tegevus;
@@ -94,6 +144,31 @@ namespace rakendusteLoomine_tulusa
             next.Click += Next_Click;
             back.Click += Back_Click;
          }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            timer.Stop();
+            if (picture == "valge")
+            {
+                pictureBox.Image = new Bitmap(@"..\..\kass.png");
+                picture = "kass";
+            }
+            else if (picture == "kass")
+            {
+                pictureBox.Image = new Bitmap(@"..\..\kot.jpg");
+                picture = "kot";
+            }
+            else if (picture == "kot")
+            {
+                pictureBox.Image = new Bitmap(@"..\..\neponimausii.jpg");
+                picture = "neponimausii";
+            }
+            else
+            {
+                pictureBox.Image = new Bitmap(@"..\..\valge.jpg");
+                picture = "valge";
+            }
+        }
+
         int l = 0;//pilti laius
         int k = 0;//pilti kõrgus
         private void Back_Click(object sender, EventArgs e)

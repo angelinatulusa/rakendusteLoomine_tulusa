@@ -11,6 +11,7 @@ Matemaatika
 1.matemaatikas tehke "Start" nupp, mis käivitab vormi
 2.matemaatikas on nupp, mis loob uuesti tehed
 3.olenevalt(в зависимости) ajast kirjutab messageboxis kui hea tulemus on
+4.progressbar, mis suureneb iga sekundi suureneb 1 võrra
 
 --------------------------------------------------------------------------------------------------------------------
 Paarid

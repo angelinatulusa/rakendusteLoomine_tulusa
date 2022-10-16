@@ -44,7 +44,7 @@ namespace rakendusteLoomine_tulusa
                 Size = new System.Drawing.Size(550, 550),
                 TabIndex = 0,
                 CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset,
-                BackColor = System.Drawing.Color.CornflowerBlue,
+                //BackColor = System.Drawing.Color.LightSteelBlue,
             };
             lihtsalt = new Button
             {
@@ -52,7 +52,7 @@ namespace rakendusteLoomine_tulusa
                 AutoSize = false,
                 Size = new System.Drawing.Size(250, 100),
                 Font = new Font("Times New Roman", 20, FontStyle.Bold),
-                BackColor = System.Drawing.Color.LightSalmon,
+                BackColor = System.Drawing.Color.LightSeaGreen,
                 Location = new System.Drawing.Point(50, 100),
             };
             keskmine = new Button
@@ -61,7 +61,7 @@ namespace rakendusteLoomine_tulusa
                 AutoSize = false,
                 Size = new System.Drawing.Size(250, 100),
                 Font = new Font("Times New Roman", 20, FontStyle.Bold),
-                BackColor = System.Drawing.Color.LightSalmon,
+                BackColor = System.Drawing.Color.LightGoldenrodYellow,
                 Location = new System.Drawing.Point(325, 100),
             };
             raske = new Button
@@ -78,6 +78,7 @@ namespace rakendusteLoomine_tulusa
                 Text = "Vali keerukus:",
                 AutoSize = true,
                 Location = new System.Drawing.Point(285, 15),
+                BackColor = System.Drawing.Color.LightGray,
                 Font = new Font("Arial", 30, FontStyle.Bold),
             };
             kinni = new Button
@@ -185,7 +186,7 @@ namespace rakendusteLoomine_tulusa
                 {
                     lbl1 = new Label()
                     {
-                        BackColor = System.Drawing.Color.CornflowerBlue,
+                        BackColor = System.Drawing.Color.LightSeaGreen,
                         AutoSize = false,
                         Dock = System.Windows.Forms.DockStyle.Fill,
                         TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
@@ -268,7 +269,7 @@ namespace rakendusteLoomine_tulusa
                 {
                     lbl1 = new Label()
                     {
-                        BackColor = System.Drawing.Color.CornflowerBlue,
+                        BackColor = System.Drawing.Color.LightGoldenrodYellow,
                         AutoSize = false,
                         Dock = System.Windows.Forms.DockStyle.Fill,
                         TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
@@ -345,7 +346,7 @@ namespace rakendusteLoomine_tulusa
                 {
                     lbl1 = new Label()
                     {
-                        BackColor = System.Drawing.Color.CornflowerBlue,
+                        BackColor = System.Drawing.Color.LightSalmon,
                         AutoSize = false,
                         Dock = System.Windows.Forms.DockStyle.Fill,
                         TextAlign = System.Drawing.ContentAlignment.MiddleCenter,

@@ -23,9 +23,8 @@ namespace rakendusteLoomine_tulusa
         int[]num1=new int[4];
         int[]num2=new int[4];
         Button start,kinni;
-        int punktid;
-        Label hoiatus;
         Button v_kord;
+        ProgressBar result;
         public matem()
         {
             this.Size = new Size(850, 300);
@@ -44,13 +43,6 @@ namespace rakendusteLoomine_tulusa
                 BorderStyle = BorderStyle.FixedSingle,
                 Size = new System.Drawing.Size(200, 30),
                 Font = new Font("Times New Roman", 20, FontStyle.Bold)
-            };
-            hoiatus = new Label
-            {
-                Text = "HOIATUS! Iga nupuvajutusega läheb sekund ja teie tulemused on selle jaoks halvemad!!",
-                Size = new System.Drawing.Size(625, 30),
-                Font = new Font("Times New Roman", 12),
-                Location = new System.Drawing.Point(125,28)
             };
             v_kord=new Button
             {
@@ -78,6 +70,16 @@ namespace rakendusteLoomine_tulusa
                 BackColor = System.Drawing.Color.LightCyan,
                 Location = new System.Drawing.Point(750, 50),
             };
+            result = new ProgressBar
+            {
+                Width = 400,
+                Height = 30,
+                Location = new Point(300, 10),
+                Value = 0,
+                Minimum = 0,
+                Maximum = 120,
+                Step = 1,
+            };
             l_nimed = new string[5, 4];
             v_kord.Click += V_kord_Click;//käivitusnupp "Teised tehed"
             start.Click += Start_Click;//käivitusnupp "Start"
@@ -85,7 +87,6 @@ namespace rakendusteLoomine_tulusa
         }
         public void Start_Click(object sender, EventArgs e)
         {
-            //tik=0;
             this.Controls.Clear();
             tableLayoutPanel.Controls.Clear();
             timer = new Timer { Interval = 1000 };
@@ -137,15 +138,19 @@ namespace rakendusteLoomine_tulusa
             }
             this.Controls.Add(tableLayoutPanel);
             this.Controls.Add(timeLabel);
-            
+            this.Controls.Add(result);
+
             this.Controls.Add(v_kord);
         }//kuvab näiteid ja taimerit
-
+        private void Result()
+        {
+            result.PerformStep();
+        }
         private void Kinni_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        int tik = 0;
+        int tik = 120;
         private void V_kord_Click(object sender, EventArgs e)
         {
             this.Controls.Clear();
@@ -175,7 +180,8 @@ namespace rakendusteLoomine_tulusa
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
-            tik +=1;
+            tik -=1;
+            Result();
             timeLabel.Text="aega veel:"+tik.ToString();
             if (Kontroll())
             {
