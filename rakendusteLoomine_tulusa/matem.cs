@@ -19,11 +19,14 @@ namespace rakendusteLoomine_tulusa
         string[,] l_nimed;
         string[] tehed = new string[4] { "+", "-", "/", "*" };
         string text;
-        Timer timer;//1000 чтобы таймер считал в секундах
+        Timer timer;//1000, et taimer loeks sekundites
         int[]num1=new int[4];
         int[]num2=new int[4];
+        //nuppu "Start" ehk mängu alustamiseks ja nuppu vormi sulgemiseks
         Button start,kinni;
+        //nuppu, et uuesti küsimusi genereerida
         Button v_kord;
+        //edenemisriba, mis näitab sekundeid
         ProgressBar result;
         public matem()
         {
@@ -69,7 +72,7 @@ namespace rakendusteLoomine_tulusa
                 Font = new Font("Times New Roman", 10, FontStyle.Bold),
                 BackColor = System.Drawing.Color.LightCyan,
                 Location = new System.Drawing.Point(750, 50),
-            };
+            };//nuppu, mis sulgeb vormi
             result = new ProgressBar
             {
                 Width = 400,
@@ -145,12 +148,12 @@ namespace rakendusteLoomine_tulusa
         private void Result()
         {
             result.PerformStep();
-        }
+        }//käivitab edenemisriba
         private void Kinni_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-        int tik = 120;
+        }//sulgeb vormi
+        int tik = 120;//sekundite piirang
         private void V_kord_Click(object sender, EventArgs e)
         {
             this.Controls.Clear();
@@ -162,13 +165,11 @@ namespace rakendusteLoomine_tulusa
         }//tühjendab vormi ja käivitab Start
         private void Matem_DoubleClick(object sender, EventArgs e)
         {
-            //timer.Start();
             timeLabel.Text = timer.ToString();
             tableLayoutPanel.Controls.Add(timeLabel);
         }
         private bool Kontroll()
         {
-            //timeLabel.Text = tik.ToString();
             if (num1[0] + num2[0] == vastused[0].Value 
                 && num1[1] - num2[1] == vastused[1].Value 
                 && num1[2] / num2[2] == vastused[2].Value 
@@ -177,7 +178,7 @@ namespace rakendusteLoomine_tulusa
                 return true;
             }
             else { return false; }
-        }
+        }//vastuste õigsuse kontrollimine
         private void Timer_Tick(object sender, EventArgs e)
         {
             tik -=1;
@@ -188,22 +189,20 @@ namespace rakendusteLoomine_tulusa
                 timer.Stop();
                 MessageBox.Show("Sinu vastused on õiged", "Palju õnne!");
                 Convert.ToInt32(tik);
-                if (tik >= 120)
+                if (tik < 120 && tik>60)
                 {
-                    MessageBox.Show("Sul läheb liiga kaua aega", "Liiga kaua((");
+                    MessageBox.Show("Sul on suurepärane tulemus!", ":>");
                 }
-                else if (tik < 120 && tik > 60)
+                else if (tik<60 && tik>10)
                 {
                     MessageBox.Show("Sul on keskmine tulemus", "Saad paremini!");
                 }
                 else
                 {
-                    MessageBox.Show("Sul on suurepärane tulemus!", ":>");
+                    MessageBox.Show("Sul läheb liiga kaua aega", "Liiga kaua((");
                 }
             }
-            
-        }
 
-        
+        }//taimer, ajaväljund, kui kõik vastused on õiged, siis kuvab olenevalt sekundite arvust, mis tulemuse inimene on saanud
     }
 }

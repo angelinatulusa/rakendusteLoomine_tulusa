@@ -17,19 +17,19 @@ namespace rakendusteLoomine_tulusa
         
         TableLayoutPanel tableLayoutPanel1 = new TableLayoutPanel();
         Label lbl1;
-        int r = 0;//перемнные для создания игрового поля r-rida
+        int r = 0;//muutujad mänguvälja loomiseks r-rida
         int t=0;//t-tulp
 
-        public Timer timer = new Timer { Interval = 500 };//время, спустя которое картинки пропадают, когда картинки не совпадают
+        public Timer timer = new Timer { Interval = 500 };//aeg, mille möödudes pildid kaovad, kui pildid ei ühti
 
         Label timeLabel,time,katse,katseLabel;
-        Timer timer2 = new Timer { Interval = 1000 };//1000 чтобы таймер считал в секундах
+        Timer timer2 = new Timer { Interval = 1000 };//1000, et taimer loeks sekundites
 
         Label firstClicked = null;
         Label secondClicked = null;
+        //et valida mängu raskusaste(igal pool sama palju katseid)
         Label keerukus;
-
-        Button lihtsalt,keskmine,raske,kinni;
+        Button lihtsalt,keskmine,raske,kinni;//kinni-nupu jaoks, mis mängu sulgeb
         public sobitamine()
         {
             this.Size = new System.Drawing.Size(900, 900);
@@ -44,8 +44,8 @@ namespace rakendusteLoomine_tulusa
                 Size = new System.Drawing.Size(550, 550),
                 TabIndex = 0,
                 CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset,
-                //BackColor = System.Drawing.Color.LightSteelBlue,
             };
+            //nupud ja Label raskusastme valimiseks
             lihtsalt = new Button
             {
                 Text = "lihtsalt",
@@ -81,6 +81,7 @@ namespace rakendusteLoomine_tulusa
                 BackColor = System.Drawing.Color.LightGray,
                 Font = new Font("Arial", 30, FontStyle.Bold),
             };
+            //vormi sulgemiseks
             kinni = new Button
             {
                 Text = "kinni",
@@ -90,6 +91,7 @@ namespace rakendusteLoomine_tulusa
                 BackColor = System.Drawing.Color.LightCyan,
                 Location = new System.Drawing.Point(800, 50),
             };
+            //katsed (1 klõps-üks katse)
             katseLabel = new Label
             {
                 Text = "veel katsed: ",
@@ -106,6 +108,7 @@ namespace rakendusteLoomine_tulusa
                 Font = new Font("Times New Roman", 21, FontStyle.Bold),
                 Location = new System.Drawing.Point(755, 25),
             };
+            //aeg
             time = new Label
             {
                 Text = "aega veel:",
@@ -128,6 +131,7 @@ namespace rakendusteLoomine_tulusa
             this.Controls.Add(keerukus);
 
             timer.Tick += Timer_Tick;
+            //sõltuvalt sellest, milline nupp on valitud, algab mängu vastav raskusaste
             lihtsalt.Click += Tegevus;
             keskmine.Click += Tegevus;
             raske.Click += Tegevus;
@@ -164,7 +168,7 @@ namespace rakendusteLoomine_tulusa
             timer2.Tick += Timer2_Tick;
 
             this.Controls.Add(this.tableLayoutPanel1);
-            List<string> icons = new List<string>()//иконки(картинки), которым надо искать пару
+            List<string> icons = new List<string>()//ikoonid (pildid), mis peavad paari otsima
             {
                 "?", "?", "k", "k", "v", "v", 
                 "e", "e", "a", "a", "t", "t",
@@ -174,13 +178,12 @@ namespace rakendusteLoomine_tulusa
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
 
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
 
-            for (int i = 0; i < 3; i++)//цикл для добавления лейблов
+            for (int i = 0; i < 3; i++)//silmus lisamiseks labeli
             {
                 for (int j = 0; j < 4; j++)
                 {
@@ -200,7 +203,7 @@ namespace rakendusteLoomine_tulusa
                 t++;
                 r = 0;
             }
-            foreach (Control control in tableLayoutPanel1.Controls)//добавление иконок рандомно
+            foreach (Control control in tableLayoutPanel1.Controls)//piltide lisamine juhuslikult
             {
                 Label iconLabel1 = control as Label;
                 if (iconLabel1 != null)
@@ -213,25 +216,29 @@ namespace rakendusteLoomine_tulusa
                 iconLabel1.Click += Lbl1_Click;
             }
 
-        }
+        }//kui valitud on lihtne raskusaste, on väli 3*4
 
         private void Kinni_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
+        }//vormi sulgemine
 
-        int tik=60;
+        int tik=60;//sekundit
         private void Timer2_Tick(object sender, EventArgs e)
         {
             tik -= 1;
             timeLabel.Text = tik.ToString();
             if (tik==0)
             {
-                MessageBox.Show("Sul sai aega otsa((", ":<");
-                this.Close();
+                using (var muusika = new SoundPlayer(@"..\..\lose.wav"))
+                {
+                    muusika.Play();
+                    MessageBox.Show("Sul sai aega otsa((", ":<");
+                    this.Close();
+                }
             }
-            
-        }
+
+        }//taimer lihtsate raskuste jaoks (seal on 60 sekundit),kui aeg otsa saab, mängitakse kaotusest lugu ja ekraanile kuvatakse teade kaotuse kohta
         private void Keskmine_Click(object sender, EventArgs e)
         {
             this.Controls.Clear();
@@ -246,7 +253,7 @@ namespace rakendusteLoomine_tulusa
             timer2.Tick += Timer2_Tick1;
 
             this.Controls.Add(this.tableLayoutPanel1);
-            List<string> icons = new List<string>()//иконки(картинки), которым надо искать пару
+            List<string> icons = new List<string>()//ikoonid (pildid), mis peavad paari otsima
             {
                 "?", "?", "k", "k", "v", "v", "u", "u",
                 "e", "e", "a", "a", "t", "t", "n", "n"
@@ -263,7 +270,7 @@ namespace rakendusteLoomine_tulusa
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
 
-            for (int i = 0; i < 4; i++)//цикл для добавления лейблов
+            for (int i = 0; i < 4; i++)//silmus lisamiseks labeli
             {
                 for (int j = 0; j < 4; j++)
                 {
@@ -283,7 +290,7 @@ namespace rakendusteLoomine_tulusa
                 t++;
                 r = 0;
             }
-            foreach (Control control in tableLayoutPanel1.Controls)//добавление иконок рандомно
+            foreach (Control control in tableLayoutPanel1.Controls)//piltide lisamine juhuslikult
             {
                 Label iconLabel1 = control as Label;
                 if (iconLabel1 != null)
@@ -295,18 +302,22 @@ namespace rakendusteLoomine_tulusa
                 iconLabel1.ForeColor = iconLabel1.BackColor;
                 iconLabel1.Click += Lbl1_Click;
             }
-        }
-        int ttik = 120;
+        }//kui on valitud keskmine raskusaste, siis on väli 4 * 4
+        int ttik = 120;//sekundit
         private void Timer2_Tick1(object sender, EventArgs e)
         {
             ttik -= 1;
             timeLabel.Text = ttik.ToString();
             if (ttik == 0)
             {
-                MessageBox.Show("Sul sai aega otsa((", ":<");
-                this.Close();
+                using (var muusika = new SoundPlayer(@"..\..\lose.wav"))
+                {
+                    muusika.Play();
+                    MessageBox.Show("Sul sai aega otsa((", ":<");
+                    this.Close();
+                }
             }
-        }
+        }//taimer keskmise raskusastme jaoks(seal on 120 sekundit),kui aeg otsa saab, mängitakse kaotusest lugu ja ekraanile kuvatakse teade kaotuse kohta
 
         private void Raske_Click(object sender, EventArgs e)
         {
@@ -322,7 +333,7 @@ namespace rakendusteLoomine_tulusa
             timer2.Tick += Timer2_Tick2;
 
             this.Controls.Add(this.tableLayoutPanel1);
-            List<string> icons = new List<string>()//иконки(картинки), которым надо искать пару
+            List<string> icons = new List<string>()//ikoonid (pildid), mis peavad paari otsima
             {
                 "?", "?", "k", "k", "v", "v", "u", "u","!","!",
                 "e", "e", "a", "a", "t", "t", "n", "n","w","w"
@@ -340,7 +351,7 @@ namespace rakendusteLoomine_tulusa
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
 
-            for (int i = 0; i < 4; i++)//цикл для добавления лейблов
+            for (int i = 0; i < 4; i++)//silmus lisamiseks labeli
             {
                 for (int j = 0; j < 5; j++)
                 {
@@ -360,7 +371,7 @@ namespace rakendusteLoomine_tulusa
                 t++;
                 r = 0;
             }
-            foreach (Control control in tableLayoutPanel1.Controls)//добавление иконок рандомно
+            foreach (Control control in tableLayoutPanel1.Controls)//piltide lisamine juhuslikult
             {
                 Label iconLabel1 = control as Label;
                 if (iconLabel1 != null)
@@ -372,18 +383,22 @@ namespace rakendusteLoomine_tulusa
                 iconLabel1.ForeColor = iconLabel1.BackColor;
                 iconLabel1.Click += Lbl1_Click;
             }
-        }
-        int tikk=180;
+        }//kui valitud on raske raskusaste, on väli 4 * 5
+        int tikk=180;//sekundit
         private void Timer2_Tick2(object sender, EventArgs e)
         {
             tikk -= 1;
             timeLabel.Text = tikk.ToString();
             if (tikk == 0)
             {
-                MessageBox.Show("Sul sai aega otsa((", ":<");
-                this.Close();
+                using (var muusika = new SoundPlayer(@"..\..\lose.wav"))
+                {
+                    muusika.Play();
+                    MessageBox.Show("Sul sai aega otsa((", ":<");
+                    this.Close();
+                }
             }
-        }
+        }//raskete raskuste taimer (seal on 180 sekundit),kui aeg otsa saab, mängitakse kaotusest lugu ja ekraanile kuvatakse teade kaotuse kohta
 
         private void Timer_Tick(object sender, EventArgs e)
         {
@@ -394,8 +409,8 @@ namespace rakendusteLoomine_tulusa
 
             firstClicked = null;
             secondClicked = null;
-        }
-        int katsed = 80;
+        }//taimer, et saaksite pilte näha, kui paar ei sobinud
+        int katsed = 80;//katsete arv
         private void Lbl1_Click(object sender, EventArgs e)
         {
             katsed -= 1;
@@ -440,8 +455,8 @@ namespace rakendusteLoomine_tulusa
 
                 timer.Start();
             }
-            
-        }
+
+        }//kui katsed on lõppenud, ilmub ekraanile teade ja kaotusest mängitakse muusikat
         public void CheckForWinner()
         {
             foreach (Control control in tableLayoutPanel1.Controls)
@@ -460,6 +475,6 @@ namespace rakendusteLoomine_tulusa
                 MessageBox.Show("Sa leised kõik paarid!!!", "Palju õnne!");
                 this.Close();
             }
-        }
+        }//kui kõik paarid on kokku kogutud, kuvatakse ekraanile sellekohane teade ja mängitakse muusikat
     }
 }

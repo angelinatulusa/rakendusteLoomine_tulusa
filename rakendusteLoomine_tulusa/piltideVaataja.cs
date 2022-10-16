@@ -14,12 +14,11 @@ namespace rakendusteLoomine_tulusa
     {
         TableLayoutPanel tableLayoutPanel1;
         PictureBox pictureBox;
-        Button close, clear, show, next, back,rohkem,vahem;
-        CheckBox stretch, rotate, center;
+        Button close, clear, show, next, back,rohkem,vahem;//vormi sulgemine, ekraani puhastamine pildist, oma pildi valimine, pildi ümberlülitamine järgmisele, pildi vahetamine eelmisele, pildi suurendamine ja vähendamine
+        CheckBox stretch, rotate, center;//venitage pilt täisekraanile, pöörake 90 kraadi, liigutage pilti keskele
         FlowLayoutPanel flowLayoutPanel1;
         OpenFileDialog openFileDialog;
-        Bitmap suurus;
-        public Timer timer = new Timer { Interval = 2000 };
+        Bitmap suurus;//pildi suurus
         string picture = "valge";//muutuja, et kontrollida, milline pilt parajasti ekraanil on
         public piltideVaataja()
         {
@@ -66,7 +65,7 @@ namespace rakendusteLoomine_tulusa
                 Font = new Font("Times New Roman", 10, FontStyle.Bold),
                 BackColor = System.Drawing.Color.LightCoral,
                 Location = new System.Drawing.Point(800, 50),
-            };
+            };//vormi sulgemine
             clear = new Button
             {
                 Text = "kustuta",
@@ -74,7 +73,7 @@ namespace rakendusteLoomine_tulusa
                 Font = new Font("Times New Roman", 10, FontStyle.Bold),
                 BackColor = System.Drawing.Color.LightCoral,
                 Location = new System.Drawing.Point(800, 50),
-            };
+            };//vormi tühjendamine
             show = new Button
             {
                 Text = "näita",
@@ -82,7 +81,7 @@ namespace rakendusteLoomine_tulusa
                 Font = new Font("Times New Roman", 10, FontStyle.Bold),
                 BackColor = System.Drawing.Color.LightCyan,
                 Location = new System.Drawing.Point(800, 50),
-            };
+            };//pildivalik
             next = new Button
             {
                 Text = "järgmiseks",
@@ -90,7 +89,7 @@ namespace rakendusteLoomine_tulusa
                 Font = new Font("Times New Roman", 10, FontStyle.Bold),
                 BackColor = System.Drawing.Color.LightGoldenrodYellow,
                 Location = new System.Drawing.Point(800, 50),
-            };
+            };//lülituda järgmisele pildile
             back = new Button
             {
                 Text = "eelmine",
@@ -98,8 +97,8 @@ namespace rakendusteLoomine_tulusa
                 Font = new Font("Times New Roman", 10, FontStyle.Bold),
                 BackColor = System.Drawing.Color.LightGoldenrodYellow,
                 Location = new System.Drawing.Point(800, 50),
-            };
-            center = new CheckBox { Text = "keskusesse" };
+            };//lülituda eelmisele pildile
+            center = new CheckBox { Text = "keskusesse" };//pildi asukoht keskel
             rohkem = new Button
             {
                 Text = "suurendama",
@@ -107,7 +106,7 @@ namespace rakendusteLoomine_tulusa
                 Font = new Font("Times New Roman", 10, FontStyle.Bold),
                 BackColor = System.Drawing.Color.LightGreen,
                 Location = new System.Drawing.Point(800, 50),
-            };
+            };//pildi suurendamine
             vahem = new Button
             {
                 Text = "vähenema",
@@ -115,7 +114,8 @@ namespace rakendusteLoomine_tulusa
                 Font = new Font("Times New Roman", 10, FontStyle.Bold),
                 BackColor = System.Drawing.Color.LightPink,
                 Location = new System.Drawing.Point(800, 50),
-            };
+            };//pildi vähendamine
+            //kontrollides, millist nuppu vajutati, ja vastavat toimingut
             close.Click += Tegevus;
             clear.Click += Tegevus;
             show.Click += Tegevus;
@@ -131,6 +131,7 @@ namespace rakendusteLoomine_tulusa
                 WrapContents = false,
 
             };
+            //nuppude kuvamine ekraanil
             foreach (Button button in buttons)
             {
                 flowLayoutPanel1.Controls.Add(button);
@@ -144,30 +145,6 @@ namespace rakendusteLoomine_tulusa
             next.Click += Next_Click;
             back.Click += Back_Click;
          }
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            timer.Stop();
-            if (picture == "valge")
-            {
-                pictureBox.Image = new Bitmap(@"..\..\kass.png");
-                picture = "kass";
-            }
-            else if (picture == "kass")
-            {
-                pictureBox.Image = new Bitmap(@"..\..\kot.jpg");
-                picture = "kot";
-            }
-            else if (picture == "kot")
-            {
-                pictureBox.Image = new Bitmap(@"..\..\neponimausii.jpg");
-                picture = "neponimausii";
-            }
-            else
-            {
-                pictureBox.Image = new Bitmap(@"..\..\valge.jpg");
-                picture = "valge";
-            }
-        }
 
         int l = 0;//pilti laius
         int k = 0;//pilti kõrgus
@@ -219,7 +196,7 @@ namespace rakendusteLoomine_tulusa
                 suurus = new Bitmap(pictureBox.Image, l, k);
             }
 
-        }
+        }//vaheta pilt tagasi
         private void Next_Click(object sender, EventArgs e)
         {
             if (picture=="valge")
@@ -267,7 +244,7 @@ namespace rakendusteLoomine_tulusa
                 suurus = new Bitmap(pictureBox.Image, l, k);
             }
 
-        }
+        }//vaheta pilti edasi
         private void R_Tegevus(object sender, EventArgs e)
         {
             if (center.Checked)
@@ -278,7 +255,7 @@ namespace rakendusteLoomine_tulusa
             {
                 pictureBox.SizeMode = PictureBoxSizeMode.Normal;
             }
-        }
+        }//teisaldage pilt keskele
         private void Tegevus(object sender, EventArgs e)
         {
             Button nupp_sender = (Button)sender;
@@ -313,7 +290,7 @@ namespace rakendusteLoomine_tulusa
                 pictureBox.Image = suurus;
                 pictureBox.Show();
             }
-        }
+        }//kontrollida, millist nuppu vajutati ja vastav toiming toimub
         private void Stretch_CheckedChanged(object sender, EventArgs e)
         {
             if (stretch.Checked)
@@ -321,6 +298,6 @@ namespace rakendusteLoomine_tulusa
             else
                 pictureBox.SizeMode = PictureBoxSizeMode.Normal;
 
-        }
+        }//pildi venitamine
     }
 }
