@@ -127,15 +127,32 @@ namespace rakendusteLoomine_tulusa
             this.Controls.Add(keerukus);
 
             timer.Tick += Timer_Tick;
-            lihtsalt.Click += Lihtsalt_Click;
-            keskmine.Click += Keskmine_Click;
-            raske.Click += Raske_Click;
+            lihtsalt.Click += Tegevus;
+            keskmine.Click += Tegevus;
+            raske.Click += Tegevus;
             
+        }
+        private void Tegevus(object sender, EventArgs e)
+        {
+            Button nupp_sender = (Button)sender;
+            if (nupp_sender.Text=="lihtsalt")
+	        {
+                lihtsalt.Click += Lihtsalt_Click;
+	        }
+            else if (nupp_sender.Text=="keskmine")
+	        {
+                keskmine.Click += Keskmine_Click;
+	        }
+            else if (nupp_sender.Text=="raske")
+	        {
+                raske.Click += Raske_Click;
+	        }
         }
 
         private void Lihtsalt_Click(object sender, EventArgs e)
         {
             this.Controls.Clear();
+            tableLayoutPanel1.Controls.Clear();
             this.Controls.Add(kinni);
             kinni.Click += Kinni_Click;
             this.Controls.Add(katseLabel);
@@ -217,6 +234,7 @@ namespace rakendusteLoomine_tulusa
         private void Keskmine_Click(object sender, EventArgs e)
         {
             this.Controls.Clear();
+            tableLayoutPanel1.Controls.Clear();
             this.Controls.Add(kinni);
             kinni.Click += Kinni_Click;
             this.Controls.Add(katseLabel);
@@ -292,6 +310,7 @@ namespace rakendusteLoomine_tulusa
         private void Raske_Click(object sender, EventArgs e)
         {
             this.Controls.Clear();
+            tableLayoutPanel1.Controls.Clear();
             this.Controls.Add(kinni);
             kinni.Click += Kinni_Click;
             this.Controls.Add(katseLabel);

@@ -4,6 +4,7 @@ Piltide vaataja
 2.pane pilt keskele
 3.saate pilti suurendada ja vähendada
 4.lisatud chechbox,mis pöörab järgmise/eelmise pilt 90 kraadi
+5.piltide vahetamine nuppudega
 
 --------------------------------------------------------------------------------------------------------------------
 Matemaatika

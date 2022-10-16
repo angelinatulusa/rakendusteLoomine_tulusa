@@ -15,17 +15,15 @@ namespace rakendusteLoomine_tulusa
         TableLayoutPanel tableLayoutPanel1;
         PictureBox pictureBox;
         Button close, clear, show, next, back,rohkem,vahem;
-        CheckBox stretch,rotate;
+        CheckBox stretch,rotate,center,SlaisdiSeanss;
         FlowLayoutPanel flowLayoutPanel1;
         OpenFileDialog openFileDialog;
-        CheckBox center;
         Bitmap suurus;
-        TextBox labipaistvus;
         string picture = "valge";//muutuja, et kontrollida, milline pilt parajasti ekraanil on
         public piltideVaataja()
         {
             Height = 450;
-            Width = 1450;
+            Width = 1300;
             Text = "piltide vaataja";
             openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All files (*.*)|*.*";
@@ -51,13 +49,12 @@ namespace rakendusteLoomine_tulusa
                 Location = new System.Drawing.Point(2, 2),
                 TabIndex = 0,
                 TabStop = false,
-                //Size = new System.Drawing.Size(200,200) 
             };
             tableLayoutPanel1.Controls.Add(pictureBox, 0, 0);
             tableLayoutPanel1.SetCellPosition(pictureBox, new TableLayoutPanelCellPosition(0, 0));
             tableLayoutPanel1.SetColumnSpan(pictureBox, 2);
             stretch = new CheckBox { Text = "stretch" };
-            rotate = new CheckBox { Text = "järgmise/eelmise pildi pöörata" };
+            rotate = new CheckBox { Text = "pöörata 90°" };
             stretch.CheckedChanged += Stretch_CheckedChanged;
             tableLayoutPanel1.Controls.Add(stretch, 0, 1);
             close = new Button { Text = "sule" };
@@ -66,9 +63,9 @@ namespace rakendusteLoomine_tulusa
             next = new Button { Text = "järgmiseks" };
             back = new Button { Text = "eelmine" };
             center = new CheckBox { Text = "keskusesse" };
+            SlaisdiSeanss=new CheckBox { Text = "slaidiseanss" };
             rohkem = new Button { Text = "suurendama" };
             vahem = new Button { Text = "vähenema" };
-            labipaistvus = new TextBox { Text = "läbipaistvus" };
             close.Click += Tegevus;
             clear.Click += Tegevus;
             show.Click += Tegevus;
@@ -82,7 +79,6 @@ namespace rakendusteLoomine_tulusa
                 FlowDirection = FlowDirection.RightToLeft,
                 AutoSize = true,
                 WrapContents = false,
-                //AutoScroll=true,
 
             };
             foreach (Button button in buttons)
@@ -90,7 +86,6 @@ namespace rakendusteLoomine_tulusa
                 flowLayoutPanel1.Controls.Add(button);
             }
             flowLayoutPanel1.Controls.Add(center);
-            flowLayoutPanel1.Controls.Add(labipaistvus);
             tableLayoutPanel1.Controls.Add(next, 1, 2);
             tableLayoutPanel1.Controls.Add(rotate, 1, 1);
             tableLayoutPanel1.Controls.Add(back, 0, 2);
